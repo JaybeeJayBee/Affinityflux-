@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/protocol", "destination": "/protocol.html" },
+    { "source": "/assets-store", "destination": "/assets-store.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/:path", "destination": "/:path.html" }
+  ]
+}
