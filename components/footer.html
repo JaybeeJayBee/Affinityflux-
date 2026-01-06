@@ -1,32 +1,58 @@
-<footer class="site-footer">
+<footer class="agency-footer">
     <div class="container">
+        
         <div class="footer-grid">
-
-            <div class="footer-col">
-                <div class="footer-logo">AFFINITYFLUX</div>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">The Intelligence Agency for the Sovereign Investor.</p>
+            
+            <div class="footer-block brand-block">
+                <h2 class="footer-logo">AFFINITYFLUX</h2>
+                <p class="tagline">Preserve. Secure. Multiply.</p>
+                <p class="mission-blurb">
+                    The Intelligence Agency for the Sovereign Investor. Bridging the gap between economic history and the digital frontier.
+                </p>
             </div>
 
-            <div class="footer-col">
-                <h4 style="color: var(--brand-blue); margin-bottom: 15px;">DIVISIONS</h4>
-                <ul style="list-style: none;">
-                    <li><a href="/protocol" style="color: #fff; text-decoration: none;">The Thesis</a></li>
-                    <li><a href="/protocol" style="color: #fff; text-decoration: none;">The Audit</a></li>
-                    <li><a href="/protocol" style="color: #fff; text-decoration: none;">The Alpha</a></li>
-                </ul>
-            </div>
+            <div class="footer-block links-block">
+                
+                <div class="col-agency">
+                    <h4 class="col-header">// AGENCY</h4>
+                    <ul class="footer-list">
+                        <li><a href="/about">About The Agency</a></li>
+                        <li><a href="/secure-comms">Contact Us</a></li>
+                        <li><a href="/recruitment">Recruitment Protocol <span class="badge-earn">[EARN]</span></a></li>
+                    </ul>
+                </div>
 
-            <div class="footer-col">
-                <h4 style="color: var(--brand-blue); margin-bottom: 15px;">LEGAL</h4>
-                <ul style="list-style: none;">
-                    <li><a href="/policies" style="color: var(--text-muted); text-decoration: none;">Privacy Protocol</a></li>
-                    <li><a href="/policies" style="color: var(--text-muted); text-decoration: none;">Terms of Service</a></li>
-                </ul>
+                <div class="col-legal">
+                    <h4 class="col-header">// LEGAL</h4>
+                    <a href="/legal" class="btn-legal">[ LEGAL PROTOCOLS ]</a>
+                </div>
             </div>
 
         </div>
-        <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #222; color: #555; font-size: 0.8rem;">
-            © 2026 AFFINITYFLUX. ALL RIGHTS RESERVED.
+
+        <hr class="footer-divider">
+
+        <div class="compliance-block">
+            <p class="disclaimer-text">
+                DISCLAIMER: Affinityflux is an education and research agency, not a financial advisory firm. Nothing on this site constitutes financial advice. Digital assets are volatile; you are the commander of your own capital. Review our 'Zero-Trust' policy before operating.
+            </p>
         </div>
+
+        <div class="footer-bar">
+            <div class="social-uplinks">
+                <a href="https://youtube.com/" class="social-link" title="YouTube" target="_blank">[ YOUTUBE ]</a>
+                <a href="https://twitter.com/" class="social-link" title="X / Twitter" target="_blank">[ X / TWITTER ]</a>
+                <a href="https://instagram.com/" class="social-link" title="Instagram" target="_blank">[ INSTAGRAM ]</a>
+                <span class="social-link locked" title="Clearance Needed">[ DISCORD <i class="fas fa-lock"></i> ]</span>
+            </div>
+            <div class="copyright">
+                &copy; <span id="year-display"></span> Affinityflux Intelligence Agency. All Rights Reserved.
+            </div>
+        </div>
+        
     </div>
-                                                                                                                           </footer>
+</footer>
+
+<script>
+    document.getElementById('year-display').textContent = new Date().getFullYear();
+                </script>
