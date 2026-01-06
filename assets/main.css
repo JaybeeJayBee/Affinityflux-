@@ -621,3 +621,71 @@ a { text-decoration: none; transition: all 0.3s ease; }
     color: var(--accent-amber, #FF8C00);
 }
 @keyframes blinker { 50% { opacity: 0; } }
+
+/* --- UPDATED NAVIGATION STYLES (Add to bottom) --- */
+
+/* Dropdown Button Styling (Matches Standard Links) */
+.dropdown-btn {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between; /* Pushes arrow to the right */
+    align-items: center;
+    padding-right: 10px;
+}
+
+/* The Chevron Arrow */
+.arrow-icon {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+    color: var(--accent-steel, #2A5D86);
+}
+
+/* Rotate Arrow when Open */
+.dropdown-btn.active .arrow-icon {
+    transform: rotate(180deg);
+    color: var(--accent-amber, #FF8C00);
+}
+
+/* Submenu Container */
+.submenu {
+    list-style: none;
+    padding-left: 20px;
+    border-left: 1px solid #333;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    
+    /* Animation Mechanics */
+    max-height: 500px; /* Arbitrary large height for animation */
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, opacity 0.4s ease;
+    opacity: 1;
+}
+
+/* Hidden State (Collapsed) */
+.submenu.hidden {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    pointer-events: none;
+}
+
+/* Ensure Sub-links look correct */
+.sub-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #888;
+    text-decoration: none;
+    display: block;
+    padding: 8px 0;
+    transition: 0.2s;
+}
+
+.sub-link:hover {
+    color: #FFF;
+    padding-left: 5px;
+}
