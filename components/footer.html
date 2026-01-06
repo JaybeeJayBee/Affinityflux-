@@ -1,59 +1,65 @@
-<footer class="agency-footer">
+<footer class="tactical-footer">
+    
+    <div class="scan-line"></div>
+
     <div class="footer-container">
         
-        <div class="footer-top-grid">
-            
-            <div class="footer-brand">
-                <h2 class="brand-logo">AFFINITYFLUX</h2>
-                <p class="brand-tagline">Preserve. Secure. Multiply.</p>
-                <p class="brand-bio">
-                    The Intelligence Agency for the Sovereign Investor. Bridging the gap between economic history and the digital frontier.
-                </p>
-            </div>
-
-            <div class="footer-links-group">
-                
-                <div class="link-col">
-                    <h4 class="col-header">// AGENCY</h4>
-                    <ul class="link-list">
-                        <li><a href="/about">About The Agency</a></li>
-                        <li><a href="/secure-comms">Contact Us</a></li>
-                        <li><a href="/recruitment">Recruitment Protocol <span class="badge-earn">[EARN]</span></a></li>
-                    </ul>
-                </div>
-
-                <div class="link-col">
-                    <h4 class="col-header">// LEGAL</h4>
-                    <a href="/legal" class="btn-legal">
-                        [ LEGAL PROTOCOLS ]
-                    </a>
+        <div class="footer-left">
+            <div class="brand-terminal">
+                <h2 class="terminal-logo">AFFINITYFLUX <span class="blink">_</span></h2>
+                <div class="status-indicator">
+                    <span class="dot"></span> SYSTEM ONLINE
                 </div>
             </div>
-
-        </div>
-
-        <div class="footer-disclaimer">
-            <p>
-                <strong>DISCLAIMER:</strong> Affinityflux is an education and research agency, not a financial advisory firm. Nothing on this site constitutes financial advice. Digital assets are volatile; you are the commander of your own capital. Review our 'Zero-Trust' policy before operating.
+            <p class="mission-text">
+                > PROTOCOL: SOVEREIGN WEALTH<br>
+                > STATUS: DEPLOYED<br>
+                > TARGET: FINANCIAL FREEDOM
             </p>
         </div>
 
-        <div class="footer-bar">
-            <div class="social-grid">
-                <a href="https://youtube.com" class="social-link" target="_blank">[ YOUTUBE ]</a>
-                <a href="https://twitter.com" class="social-link" target="_blank">[ X / TWITTER ]</a>
-                <a href="https://instagram.com" class="social-link" target="_blank">[ INSTAGRAM ]</a>
-                <span class="social-link locked">[ DISCORD <i class="fas fa-lock"></i> ]</span>
+        <div class="footer-right">
+            
+            <div class="cmd-col">
+                <h4 class="cmd-header">[ AGENCY ]</h4>
+                <ul class="cmd-list">
+                    <li><a href="/about">:: MISSION PROFILE</a></li>
+                    <li><a href="/secure-comms">:: SECURE UPLINK</a></li>
+                    <li><a href="/recruitment">:: RECRUITMENT <span class="tag-earn">EARN</span></a></li>
+                </ul>
             </div>
 
-            <div class="copyright-text">
-                &copy; <span id="year-display"></span> Affinityflux Intelligence.
+            <div class="cmd-col">
+                <h4 class="cmd-header">[ PROTOCOLS ]</h4>
+                <a href="/legal" class="btn-terminal">
+                    // ACCESS LEGAL DOCS
+                </a>
             </div>
+
         </div>
 
     </div>
+
+    <div class="warning-box">
+        <p class="warning-text">
+            <i class="fas fa-exclamation-triangle"></i> <strong>ADVISORY:</strong> AFFINITYFLUX IS AN INTELLIGENCE FIRM, NOT A FINANCIAL ADVISOR. MARKETS ARE VOLATILE. DEPLOY CAPITAL AT YOUR OWN RISK. EXECUTE ZERO-TRUST.
+        </p>
+    </div>
+
+    <div class="sub-level">
+        <div class="social-hud">
+            <a href="https://youtube.com" target="_blank" class="hud-link">[ YOUTUBE ]</a>
+            <a href="https://twitter.com" target="_blank" class="hud-link">[ X / TWITTER ]</a>
+            <a href="https://instagram.com" target="_blank" class="hud-link">[ INSTAGRAM ]</a>
+            <span class="hud-link locked">[ DISCORD <i class="fas fa-lock"></i> ]</span>
+        </div>
+        <div class="system-id">
+            ID: <span id="year-display"></span>-AFX-V1.0
+        </div>
+    </div>
+
 </footer>
 
 <script>
-    document.getElementById('year-display').innerText = new Date().getFullYear();
+    document.getElementById('year-display').textContent = new Date().getFullYear();
 </script>
