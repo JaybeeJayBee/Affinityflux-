@@ -443,3 +443,181 @@ a { text-decoration: none; transition: all 0.3s ease; }
         max-width: 100%;
     }
 }
+
+/* =========================================
+   TACTICAL NAVIGATION SYSTEM (FINAL)
+   ========================================= */
+
+/* 1. The Trigger Button [ /// ] */
+#nav-trigger {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    z-index: 10001; /* Must be higher than overlay */
+    background: #000;
+    border: 1px solid var(--accent-steel, #2A5D86);
+    color: var(--accent-steel, #2A5D86);
+    padding: 10px 15px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#nav-trigger:hover {
+    color: var(--accent-amber, #FF8C00);
+    border-color: var(--accent-amber, #FF8C00);
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.3);
+}
+
+/* 2. The Full Screen Overlay */
+#nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Full Height */
+    background-color: rgba(2, 2, 2, 0.98); /* Deep Void (Opaque) */
+    z-index: 10000; /* Sit on top of everything */
+    
+    /* CRITICAL: ENABLES VERTICAL SCROLLING */
+    overflow-y: auto; 
+    
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px; /* Space for the logo */
+    padding-bottom: 50px; /* Space at bottom for scrolling */
+    
+    /* Visibility Animation */
+    opacity: 0;
+    pointer-events: none; /* Click-through when hidden */
+    transition: opacity 0.3s ease;
+}
+
+/* This class is added by JS to show the menu */
+#nav-overlay.visible {
+    opacity: 1;
+    pointer-events: auto; /* Re-enable clicking */
+}
+
+/* 3. Brand Header inside Menu */
+.nav-brand-header {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.nav-brand-header h1 {
+    font-family: 'Courier New', monospace;
+    color: #FFF;
+    font-size: 1.8rem;
+    letter-spacing: -1px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+/* 4. Menu List Layout */
+.terminal-menu {
+    width: 100%;
+    max-width: 600px; /* Keeps it readable on Desktop */
+    padding: 0 20px;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* 5. Standard Links (Home, FAQ, etc) */
+.nav-item {
+    margin-bottom: 20px;
+}
+
+.nav-link {
+    font-family: 'Courier New', monospace;
+    font-size: 1.4rem;
+    color: #CCC;
+    text-decoration: none;
+    transition: 0.2s;
+    display: block;
+}
+
+.nav-link:hover {
+    color: var(--accent-amber, #FF8C00);
+    padding-left: 10px; /* Glitch movement effect */
+    text-shadow: 0 0 10px rgba(255, 140, 0, 0.4);
+}
+
+/* 6. Group Headers (Digital Assets, Programs) */
+.nav-group {
+    margin-bottom: 30px;
+    border-left: 1px solid #333; /* The vertical line on the left */
+    padding-left: 20px;
+}
+
+.group-header {
+    font-family: 'Courier New', monospace;
+    color: var(--accent-steel, #2A5D86); /* Blue Header */
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* 7. Submenus */
+.submenu {
+    list-style: none;
+    padding: 0;
+}
+
+.submenu li {
+    margin-bottom: 12px;
+}
+
+.sub-link {
+    font-family: 'Inter', sans-serif; /* Clean font for reading */
+    font-size: 1rem;
+    color: #AAA;
+    text-decoration: none;
+    transition: 0.2s;
+    display: block;
+}
+
+.sub-link:hover {
+    color: #FFF;
+}
+
+/* 8. LOCKED ITEMS (The Greyed Out Links) */
+.locked-item {
+    color: #444 !important; /* Force Dark Grey */
+    cursor: not-allowed;
+    pointer-events: none; /* Makes it unclickable */
+}
+
+.locked-item i {
+    font-size: 0.8rem;
+    margin-left: 5px;
+}
+
+/* 9. EARN Badge */
+.tag-earn {
+    background: var(--accent-amber, #FF8C00);
+    color: #000;
+    font-family: sans-serif;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 2px 5px;
+    margin-left: 8px;
+    border-radius: 2px;
+    vertical-align: middle;
+}
+
+/* Blink Animation for the Underscore _ */
+.blink {
+    animation: blinker 1s linear infinite;
+    color: var(--accent-amber, #FF8C00);
+}
+@keyframes blinker { 50% { opacity: 0; } }
