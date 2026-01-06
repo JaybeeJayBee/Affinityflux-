@@ -211,170 +211,202 @@ a { text-decoration: none; transition: all 0.3s ease; }
     .retro-grid-wrap { transform: perspective(300px) rotateX(60deg); }
                 }
 
-/* --- PHASE 2: TERMINAL NAV & FOOTER STYLES --- */
+/* =========================================
+   AGENCY FOOTER MODULE
+   ========================================= */
 
-/* 1. NAVIGATION TRIGGER BUTTON */
-#nav-trigger {
-    position: fixed;
-    top: 25px;
-    right: 25px;
-    z-index: 2000;
-    background-color: #000;
-    border: 1px solid var(--accent-steel);
-    color: var(--accent-steel);
-    padding: 12px 18px;
-    font-family: var(--font-header);
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-#nav-trigger:hover {
-    color: var(--accent-amber);
-    border-color: var(--accent-amber);
-    box-shadow: 0 0 15px rgba(255, 140, 0, 0.3);
-}
-
-/* 2. NAVIGATION OVERLAY (Scrollable Fix) */
-#nav-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(5, 5, 5, 0.98);
-    z-index: 1500;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.4s ease;
-    
-    /* CRITICAL: VERTICAL SCROLL */
-    overflow-y: auto; 
-    display: flex;
-    align-items: flex-start; /* Start from top so scrolling works naturally */
-    justify-content: center;
-}
-
-#nav-overlay.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* 3. TERMINAL MENU LIST */
-.nav-content-wrapper {
-    width: 100%;
-    max-width: 600px;
-    padding: 100px 20px 50px; /* Top padding clears the trigger button */
-    text-align: center;
-}
-
-.nav-list { list-style: none; padding: 0; }
-.nav-item { margin-bottom: 25px; }
-
-.nav-link {
-    font-family: var(--font-header);
-    font-size: 1.8rem;
-    color: #fff;
-    text-decoration: none;
-    text-transform: uppercase;
-    border-bottom: 2px solid transparent;
-}
-
-.nav-link:hover {
-    color: var(--accent-amber);
-    border-bottom-color: var(--accent-amber);
-    text-shadow: var(--glow-amber);
-}
-
-/* Submenu Groups */
-.nav-group { margin-bottom: 30px; border-top: 1px solid #222; padding-top: 20px; }
-.group-header {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--accent-steel);
-    letter-spacing: 2px;
-    margin-bottom: 15px;
-}
-
-.submenu { list-style: none; }
-.submenu li { margin-bottom: 10px; }
-.sub-link { font-size: 1rem; color: #ccc; text-decoration: none; transition: 0.3s; }
-.sub-link:hover { color: #fff; }
-
-/* Locked Items */
-.locked-item {
-    color: #444 !important;
-    cursor: not-allowed;
-    pointer-events: none;
-    font-style: italic;
-}
-
-/* 4. AGENCY FOOTER LAYOUT */
+/* 1. Base Structure */
 .agency-footer {
-    background-color: #080808;
-    border-top: 2px solid var(--accent-steel);
-    padding: 80px 0 40px;
-    font-family: var(--font-body);
+    background-color: #080808; /* Deep Grey/Black */
+    border-top: 2px solid var(--accent-steel, #2A5D86); /* Cobalt Steel Line */
+    padding: 60px 0 30px 0;
+    margin-top: 80px;
+    font-family: var(--font-body, 'Inter', sans-serif);
+    color: #888;
 }
 
-.footer-grid {
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 2. Top Grid (Brand vs Links) */
+.footer-top-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
+    grid-template-columns: 1fr 1fr; /* Desktop: Split 50/50 */
+    gap: 60px;
     margin-bottom: 50px;
 }
 
-/* Brand Block */
-.footer-logo { font-size: 2rem; color: #fff; margin-bottom: 10px; }
-.tagline { color: var(--accent-amber); font-family: var(--font-header); margin-bottom: 20px; }
-.mission-blurb { color: #888; font-size: 0.9rem; line-height: 1.6; max-width: 400px; }
+/* 3. Brand Styling */
+.brand-logo {
+    font-family: var(--font-header, 'Courier New', monospace);
+    color: #FFF;
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+    font-weight: bold;
+}
 
-/* Links Block */
-.links-block { display: flex; gap: 50px; }
-.col-header { color: var(--accent-steel); margin-bottom: 20px; font-family: var(--font-header); }
-.footer-list { list-style: none; }
-.footer-list li { margin-bottom: 12px; }
-.footer-list a { color: #aaa; text-decoration: none; font-size: 0.95rem; }
-.footer-list a:hover { color: #fff; }
+.brand-tagline {
+    color: var(--accent-amber, #FF8C00); /* Signal Amber */
+    font-family: var(--font-header, 'Courier New', monospace);
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
-.badge-earn { color: var(--accent-amber); font-weight: bold; font-size: 0.8rem; margin-left: 5px; }
+.brand-bio {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 400px;
+}
 
+/* 4. Links Styling */
+.footer-links-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Sub-grid for links */
+    gap: 20px;
+}
+
+.col-header {
+    font-family: var(--font-header, 'Courier New', monospace);
+    color: var(--accent-steel, #2A5D86);
+    margin-bottom: 20px;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.link-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.link-list li {
+    margin-bottom: 12px;
+}
+
+.link-list a {
+    color: #BBB;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.link-list a:hover {
+    color: var(--accent-amber, #FF8C00);
+    padding-left: 5px; /* Tactical slide effect */
+}
+
+.badge-earn {
+    font-size: 0.7rem;
+    color: var(--accent-amber, #FF8C00);
+    font-weight: bold;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+/* 5. Legal Button */
 .btn-legal {
     display: inline-block;
-    border: 1px solid #444;
-    padding: 10px 20px;
-    color: #888;
-    font-family: var(--font-header);
-    font-size: 0.85rem;
+    padding: 10px 15px;
+    border: 1px solid #333;
+    color: #DDD;
+    text-decoration: none;
+    font-family: var(--font-header, 'Courier New', monospace);
+    font-size: 0.8rem;
+    background: rgba(255, 255, 255, 0.03);
     transition: 0.3s;
 }
-.btn-legal:hover { border-color: #fff; color: #fff; text-shadow: 0 0 10px #fff; }
 
-/* Footer Divider & Disclaimer */
-.footer-divider { border: 0; border-top: 1px solid #222; margin: 0 0 30px; }
-.compliance-block { margin-bottom: 40px; }
-.disclaimer-text { font-size: 0.75rem; color: #444; line-height: 1.5; text-align: justify; }
+.btn-legal:hover {
+    border-color: var(--accent-amber, #FF8C00);
+    color: var(--accent-amber, #FF8C00);
+    background: rgba(255, 140, 0, 0.1);
+}
 
-/* Bottom Bar */
+/* 6. Disclaimer Section */
+.footer-disclaimer {
+    border-top: 1px solid #1a1a1a;
+    border-bottom: 1px solid #1a1a1a;
+    padding: 25px 0;
+    margin-bottom: 30px;
+}
+
+.footer-disclaimer p {
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: #555;
+}
+
+.footer-disclaimer strong {
+    color: #777;
+}
+
+/* 7. Bottom Bar & Socials */
 .footer-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid #111;
-    padding-top: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.social-uplinks { display: flex; gap: 20px; }
-.social-link { color: var(--accent-steel); font-family: var(--font-header); font-size: 0.85rem; transition: 0.3s; }
-.social-link:hover { color: var(--accent-amber); }
+.social-grid {
+    display: flex;
+    gap: 20px;
+}
 
-.social-link.locked { color: #333; cursor: not-allowed; }
-.copyright { color: #444; font-size: 0.8rem; }
+.social-link {
+    font-family: var(--font-header, 'Courier New', monospace);
+    font-size: 0.8rem;
+    color: #777;
+    text-decoration: none;
+    transition: 0.3s;
+}
 
-/* MOBILE RESPONSIVE FOOTER */
+.social-link:hover {
+    color: #FFF;
+}
+
+.social-link.locked {
+    color: #333;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.copyright-text {
+    font-size: 0.8rem;
+    color: #444;
+}
+
+/* =========================================
+   MOBILE RESPONSIVENESS (The Fix)
+   ========================================= */
 @media (max-width: 768px) {
-    .footer-grid { grid-template-columns: 1fr; }
-    .links-block { flex-direction: column; gap: 30px; }
-    .footer-bar { flex-direction: column; gap: 20px; text-align: center; }
-    .social-uplinks { flex-wrap: wrap; justify-content: center; }
+    .footer-top-grid {
+        grid-template-columns: 1fr; /* Stack vertically on mobile */
+        gap: 40px;
     }
+
+    .footer-links-group {
+        grid-template-columns: 1fr; /* Stack links vertically on small mobile */
+        gap: 30px;
+    }
+
+    .brand-bio {
+        max-width: 100%; /* Use full width */
+    }
+    
+    .footer-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .social-grid {
+        flex-wrap: wrap;
+    }
+}
