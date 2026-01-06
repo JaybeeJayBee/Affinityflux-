@@ -792,3 +792,36 @@ a { text-decoration: none; transition: all 0.3s ease; }
     color: #FFF;
     padding-left: 5px;
 }
+
+/* =========================================
+   PHASE 6 UPGRADES (Scroll & Active State)
+   ========================================= */
+
+/* 1. SMART SCROLL (Hide Button) */
+#nav-trigger {
+    /* Existing styles remain, this just adds the transform capability */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s;
+}
+
+#nav-trigger.scroll-hidden {
+    /* Moves the button up and off the screen */
+    transform: translateY(-150%); 
+}
+
+/* 2. ACTIVE PAGE GLOW (Persistent) */
+.nav-link.active-page,
+.sub-link.active-page {
+    color: var(--accent-amber, #FF8C00) !important;
+    text-shadow: 0 0 10px rgba(255, 140, 0, 0.6);
+    border-left: 2px solid var(--accent-amber, #FF8C00); /* Optional marker */
+    padding-left: 15px; /* Indent slightly */
+    background: rgba(255, 140, 0, 0.05); /* Very faint background tint */
+}
+
+/* Ensure the arrow on dropdowns stays lit if a child is active */
+.dropdown-btn.child-active {
+    color: var(--accent-amber, #FF8C00);
+}
+.dropdown-btn.child-active .arrow-icon {
+    color: var(--accent-amber, #FF8C00);
+}
