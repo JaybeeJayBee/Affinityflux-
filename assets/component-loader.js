@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.text())
         .then(data => {
             document.getElementById("nav-overlay-container").innerHTML = data;
+            // Once the HTML is there, we start the interactive logic
             initializeNav(); 
         });
 
@@ -14,8 +15,8 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             document.getElementById("footer-container").innerHTML = data;
             
-            // --- 👇 THIS IS THE MISSING FIX 👇 ---
-            // We must find the span ID *after* the HTML is loaded and inject the date.
+            // --- THE YEAR FIX ---
+            // Finds the year span and updates it to the current year
             const yearSpan = document.getElementById('year-display');
             if (yearSpan) {
                 yearSpan.textContent = new Date().getFullYear();
@@ -23,28 +24,48 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 });
 
-// 3. NAVIGATION LOGIC
+// 3. NAVIGATION & DROPDOWN LOGIC
 function initializeNav() {
     const trigger = document.getElementById('nav-trigger');
     const overlay = document.getElementById('nav-overlay');
-    
-    // Note: If you want to change the [ /// ] to [ X ], we need the text element
     const triggerText = trigger ? trigger.querySelector('.trigger-text') : null;
 
+    // A. MAIN MENU TOGGLE (Open/Close the full overlay)
     if(trigger && overlay) {
         trigger.addEventListener('click', () => {
-            overlay.classList.toggle('visible'); // Toggle the class
+            overlay.classList.toggle('visible'); 
             
-            // Update the Icon Text if the element exists
+            // Toggle the Text between [ /// ] and [ X ]
             if (triggerText) {
                 if (overlay.classList.contains('visible')) {
                     triggerText.textContent = '[ X ]';
-                    triggerText.setAttribute('data-text-current', '[ X ]');
+                    // Lock the background page from scrolling while menu is open
+                    document.body.style.overflow = 'hidden'; 
                 } else {
                     triggerText.textContent = '[ /// ]';
-                    triggerText.setAttribute('data-text-current', '[ /// ]');
+                    // Unlock the background page
+                    document.body.style.overflow = ''; 
                 }
             }
         });
     }
+
+    // B. DROPDOWN ACCORDION LOGIC (Expand/Collapse Submenus)
+    // This finds all buttons we named "dropdown-btn" in the HTML
+    const dropdowns = document.querySelectorAll('.dropdown-btn');
+    
+    dropdowns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // 1. Rotate the arrow icon
+            this.classList.toggle('active');
+            
+            // 2. Find the submenu (the <ul> list immediately after the button)
+            const submenu = this.nextElementSibling;
+            
+            // 3. Show or Hide it
+            if (submenu) {
+                submenu.classList.toggle('hidden');
+            }
+        });
+    });
 }
