@@ -1,24 +1,22 @@
-/* --- 1. CSS VARIABLES (AGENCY TERMINAL THEME) --- */
+/* --- 1. CSS VARIABLES --- */
 :root {
-    /* PALETTE */
-    --bg-void: #050505;       /* Main Background */
-    --bg-panel: #121212;      /* Card/Form Background */
-    --accent-steel: #2A5D86;  /* Primary Headers/Borders (Cobalt Steel) */
-    --accent-amber: #FF8C00;  /* CTA/Glows/Highlights (Signal Amber) */
-    --text-primary: #E0E0E0;  /* Main Body Text */
-    --text-muted: #888888;    /* Subtitles */
+    /* Colors */
+    --bg-void: #050505;
+    --bg-panel: #121212;
+    --accent-steel: #2A5D86;
+    --accent-amber: #FF8C00;
+    --text-primary: #E0E0E0;
+    --text-muted: #888888;
     
-    /* FONTS */
-    --font-header: 'Courier New', monospace;
+    /* Fonts */
+    --font-header: 'Courier Prime', 'Courier New', monospace;
     --font-body: 'Inter', sans-serif;
     
-    /* EFFECTS */
+    /* Effects */
     --glow-amber: 0 0 15px rgba(255, 140, 0, 0.4);
-    --border-steel: 1px solid rgba(42, 93, 134, 0.5);
-    --border-amber: 1px solid var(--accent-amber);
 }
 
-/* --- 2. GLOBAL RESET --- */
+/* --- 2. RESET & GLOBAL --- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
@@ -30,32 +28,215 @@ html, body {
     line-height: 1.6;
 }
 
-/* --- 3. TYPOGRAPHY & UTILITIES --- */
-h1, h2, h3 {
+h1, h2, h3, h4 {
     font-family: var(--font-header);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #fff;
+    margin-bottom: 1rem;
 }
 
-.text-amber { color: var(--accent-amber); }
-.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-.narrow-read { max-width: 800px; }
-.center-text { text-align: center; }
-.section-header-center { text-align: center; font-size: 2rem; margin-bottom: 40px; color: var(--accent-steel); }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
-/* --- 4. BUTTONS (TERMINAL STYLE) --- */
-.btn-primary {
+/* --- 3. HERO SECTION (RETRO GRID ANIMATION) --- */
+.hero-section {
+    position: relative;
+    height: 90vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--accent-steel);
+}
+
+/* The Grid Container */
+.retro-grid-container {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    perspective: 600px; /* Creates the 3D depth */
+}
+
+/* The Moving Grid Lines */
+.retro-grid {
+    position: absolute;
+    top: 0; left: 0;
+    width: 200%; height: 200%;
+    background-image: 
+        linear-gradient(transparent 95%, var(--accent-steel) 95%),
+        linear-gradient(90deg, transparent 95%, var(--accent-steel) 95%);
+    background-size: 60px 60px;
+    transform: rotateX(60deg) translateY(-100px) translateZ(-200px);
+    opacity: 0.2;
+    animation: gridMove 10s infinite linear;
+    transform-origin: center top;
+}
+
+/* The Fade to Black at Top */
+.retro-grid-fade {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(to bottom, var(--bg-void) 20%, transparent 100%);
+    z-index: 0;
+}
+
+@keyframes gridMove {
+    0% { transform: rotateX(60deg) translateY(0); }
+    100% { transform: rotateX(60deg) translateY(60px); }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+}
+
+.hero-headline {
+    font-size: 3.5rem;
+    color: var(--text-primary);
+    text-shadow: 0 0 20px rgba(42, 93, 134, 0.5);
+    margin-bottom: 20px;
+}
+
+.hero-subheadline {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    font-family: var(--font-body);
+}
+
+/* --- 4. CONTENT SECTIONS --- */
+.content-section, .trinity-section, .cta-section, .mini-cta {
+    padding: 80px 0;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    color: var(--accent-steel);
+    margin-bottom: 20px;
+    border-left: 4px solid var(--accent-amber);
+    padding-left: 15px;
+}
+
+.highlight-text {
+    color: var(--accent-amber);
+    font-weight: 700;
+}
+
+/* Mission Terminal Panel */
+.terminal-panel {
+    background-color: var(--bg-panel);
+    border: 1px solid var(--accent-steel);
+    padding: 40px;
+    position: relative;
+}
+
+.terminal-panel::before {
+    content: "SYS.STATUS: ONLINE";
+    position: absolute;
+    top: -10px; right: 20px;
+    background-color: var(--bg-void);
+    color: var(--accent-amber);
+    font-family: var(--font-header);
+    font-size: 0.8rem;
+    padding: 0 10px;
+}
+
+/* --- 5. THE TRINITY PROTOCOL --- */
+.section-subtitle {
+    margin-bottom: 50px;
+    color: var(--text-muted);
+    max-width: 700px;
+}
+
+.trinity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.trinity-card {
+    background-color: var(--bg-panel);
+    border: 1px solid var(--accent-steel);
+    padding: 30px;
+    transition: all 0.3s ease;
+}
+
+.trinity-card:hover {
+    border-color: var(--accent-amber);
+    box-shadow: var(--glow-amber);
+    transform: translateY(-5px);
+}
+
+.card-title {
+    color: var(--text-primary);
+    font-size: 1.4rem;
+}
+
+.card-tag {
+    font-size: 0.9rem;
+    color: var(--accent-amber);
+}
+
+.card-subtitle {
+    font-size: 0.95rem;
+    color: var(--accent-steel);
+    margin-bottom: 20px;
+    font-family: var(--font-body);
+    font-weight: 600;
+}
+
+.card-bullets {
+    list-style: none;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    border-top: 1px solid #333;
+    padding-top: 15px;
+}
+
+.card-bullets li {
+    margin-bottom: 8px;
+}
+
+.card-bullets strong {
+    color: var(--accent-steel);
+}
+
+/* --- 6. BUTTONS & CTA --- */
+.cta-section {
+    text-align: center;
+    background: linear-gradient(to bottom, var(--bg-void), var(--bg-panel));
+}
+
+.mini-cta {
+    text-align: center;
+    border-top: 1px solid #222;
+}
+
+a.btn-primary, a.btn-secondary {
     display: inline-block;
-    padding: 15px 30px;
+    padding: 15px 35px;
+    text-decoration: none;
     font-family: var(--font-header);
     font-weight: 700;
-    text-decoration: none;
-    background-color: transparent;
-    border: var(--border-amber);
-    color: var(--accent-amber);
+    text-transform: uppercase;
+    font-size: 0.9rem;
     transition: all 0.3s ease;
+}
+
+/* Primary: Amber */
+.btn-primary {
+    border: 2px solid var(--accent-amber);
+    color: var(--accent-amber);
 }
 
 .btn-primary:hover {
@@ -64,173 +245,20 @@ h1, h2, h3 {
     box-shadow: var(--glow-amber);
 }
 
-.text-link {
+/* Secondary: Steel */
+.btn-secondary {
+    border: 1px solid var(--accent-steel);
     color: var(--accent-steel);
-    text-decoration: none;
-    font-family: var(--font-header);
-    font-weight: bold;
-    border-bottom: 1px solid transparent;
-    transition: 0.3s;
-}
-.text-link:hover { border-bottom: 1px solid var(--accent-steel); }
-
-
-/* --- 5. A. HERO SECTION (RETRO GRID ANIMATION) --- */
-.hero-section {
-    position: relative;
-    height: 90vh; /* Almost full screen */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
-    background-color: var(--bg-void);
 }
 
-/* The Moving Grid */
-.retro-grid-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    perspective: 400px; /* Creates the 3D depth */
-    z-index: 0;
+.btn-secondary:hover {
+    background-color: var(--accent-steel);
+    color: #fff;
 }
 
-.retro-grid {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    width: 200%;
-    height: 200%;
-    margin-left: -50%;
-    transform: rotateX(60deg); /* Tilts the grid floor */
-    background-image: 
-        linear-gradient(var(--bg-void) 2px, transparent 2px),
-        linear-gradient(90deg, var(--bg-void) 2px, transparent 2px);
-    background-size: 50px 50px;
-    background-color: rgba(42, 93, 134, 0.15); /* Faint Cobalt Steel */
-    animation: gridMove 20s linear infinite;
-}
-
-/* Fade out the grid at the top so it doesn't look like a wall */
-.retro-grid-container::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to bottom, var(--bg-void) 20%, transparent 80%);
-}
-
-@keyframes gridMove {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 1000px; }
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2; /* Sits on top of grid */
-}
-
-.hero-headline {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    text-shadow: 0 0 10px #000;
-}
-
-.hero-subheadline {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    margin-bottom: 40px;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    text-shadow: 0 0 10px #000;
-}
-
-
-/* --- 6. SECTIONS --- */
-.content-section { padding: 80px 0; }
-
-.terminal-title {
-    font-size: 1.5rem;
-    color: var(--accent-steel);
-    border-left: 3px solid var(--accent-amber);
-    padding-left: 15px;
-    margin-bottom: 25px;
-}
-
-/* C. TERMINAL PANEL */
-.terminal-panel {
-    background-color: var(--bg-panel);
-    border: var(--border-steel);
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.panel-header {
-    background-color: rgba(42, 93, 134, 0.2);
-    padding: 10px 20px;
-    font-family: var(--font-header);
-    font-size: 0.9rem;
-    border-bottom: var(--border-steel);
-    display: flex;
-    align-items: center;
-}
-
-.status-light {
-    display: inline-block;
-    width: 10px; height: 10px;
-    background-color: #00ff00; /* Green active light */
-    border-radius: 50%;
-    margin-right: 10px;
-    box-shadow: 0 0 5px #00ff00;
-}
-
-.panel-body { padding: 30px; }
-
-
-/* D. TRINITY GRID */
-.trinity-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.protocol-card {
-    background-color: var(--bg-panel);
-    border: 1px solid #333;
-    padding: 30px;
-    transition: all 0.3s ease;
-    cursor: default;
-}
-
-.protocol-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--accent-amber);
-    box-shadow: var(--glow-amber);
-}
-
-.card-icon { font-size: 2rem; color: var(--accent-steel); margin-bottom: 20px; }
-.division-sub {
-    display: block;
-    font-family: var(--font-header);
-    font-size: 0.8rem;
-    color: var(--accent-amber);
-    margin-bottom: 15px;
-    border-bottom: 1px solid #333;
-    padding-bottom: 10px;
-}
-
-/* E. DIGITAL ASSETS & F. FAQ */
-.cta-section { padding: 100px 0; border-top: 1px solid #222; border-bottom: 1px solid #222; }
-.cta-text { margin-bottom: 30px; font-size: 1.2rem; }
-
-.mini-cta { padding: 40px 0; background-color: var(--bg-panel); }
-.small-text { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px; }
-
-
-/* --- RESPONSIVE --- */
+/* --- 7. MOBILE OPTIMIZATION --- */
 @media (max-width: 768px) {
-    .hero-headline { font-size: 1.8rem; }
-    .hero-section { height: 80vh; }
+    .hero-headline { font-size: 2.2rem; }
     .trinity-grid { grid-template-columns: 1fr; }
-    }
+    .terminal-panel { padding: 20px; }
+}
