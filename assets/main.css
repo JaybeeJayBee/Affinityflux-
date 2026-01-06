@@ -210,144 +210,176 @@ a { text-decoration: none; transition: all 0.3s ease; }
     .hero-section { height: 80vh; }
     .retro-grid-wrap { transform: perspective(300px) rotateX(60deg); }
                 }
-
 /* =========================================
-   AGENCY FOOTER MODULE
+   TACTICAL HUD FOOTER (RE-DESIGN)
    ========================================= */
 
-/* 1. Base Structure */
-.agency-footer {
-    background-color: #080808; /* Deep Grey/Black */
-    border-top: 2px solid var(--accent-steel, #2A5D86); /* Cobalt Steel Line */
-    padding: 60px 0 30px 0;
-    margin-top: 80px;
-    font-family: var(--font-body, 'Inter', sans-serif);
+/* 1. Base Terminal Styling */
+.tactical-footer {
+    position: relative;
+    background-color: #020202; /* Pure Void */
+    margin-top: 100px;
+    padding-bottom: 20px;
+    font-family: 'Courier New', monospace; /* Force Monospace Everywhere */
     color: #888;
+    overflow: hidden;
+}
+
+/* 2. The "Scanner" Line (Top Glow) */
+.scan-line {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-steel), var(--accent-amber), var(--accent-steel), transparent);
+    box-shadow: 0 0 15px var(--accent-amber);
+    margin-bottom: 50px;
 }
 
 .footer-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 50px;
 }
 
-/* 2. Top Grid (Brand vs Links) */
-.footer-top-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Desktop: Split 50/50 */
-    gap: 60px;
-    margin-bottom: 50px;
-}
-
-/* 3. Brand Styling */
-.brand-logo {
-    font-family: var(--font-header, 'Courier New', monospace);
+/* 3. The Brand Terminal */
+.terminal-logo {
     color: #FFF;
-    font-size: 1.8rem;
-    margin-bottom: 8px;
-    letter-spacing: -1px;
-    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 5px;
+    letter-spacing: -2px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-.brand-tagline {
-    color: var(--accent-amber, #FF8C00); /* Signal Amber */
-    font-family: var(--font-header, 'Courier New', monospace);
-    font-size: 0.85rem;
+.blink {
+    animation: blinker 1s linear infinite;
+    color: var(--accent-amber);
+}
+
+@keyframes blinker { 50% { opacity: 0; } }
+
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.75rem;
+    color: var(--accent-amber);
+    border: 1px solid rgba(255, 140, 0, 0.3);
+    padding: 2px 8px;
     margin-bottom: 20px;
+    background: rgba(255, 140, 0, 0.05);
+}
+
+.dot {
+    height: 6px;
+    width: 6px;
+    background-color: var(--accent-amber);
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 0 0 5px var(--accent-amber);
+}
+
+.mission-text {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #555;
+    border-left: 2px solid #222;
+    padding-left: 15px;
+}
+
+/* 4. Command Grid (Right Side) */
+.footer-right {
+    display: flex;
+    gap: 60px;
+}
+
+.cmd-header {
+    color: var(--accent-steel);
+    font-size: 1rem;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.cmd-list {
+    list-style: none;
+    padding: 0;
+}
+
+.cmd-list li {
+    margin-bottom: 15px;
+}
+
+.cmd-list a {
+    color: #AAA;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 0.2s;
     text-transform: uppercase;
+}
+
+.cmd-list a:hover {
+    color: #FFF;
+    text-shadow: 0 0 8px #FFF;
+    padding-left: 5px; /* Glitch movement */
+}
+
+.tag-earn {
+    background: var(--accent-amber);
+    color: #000;
+    font-weight: bold;
+    font-size: 0.7rem;
+    padding: 1px 4px;
+    margin-left: 5px;
+}
+
+/* 5. Terminal Button */
+.btn-terminal {
+    display: inline-block;
+    border: 1px dashed var(--accent-steel);
+    color: var(--accent-steel);
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: 0.3s;
+    background: rgba(42, 93, 134, 0.05);
+}
+
+.btn-terminal:hover {
+    border-style: solid;
+    background: var(--accent-steel);
+    color: #FFF;
+    box-shadow: 0 0 15px var(--accent-steel);
+}
+
+/* 6. Warning Box (Disclaimer) */
+.warning-box {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 15px 20px;
+    background: rgba(20, 20, 20, 0.8);
+    border-left: 3px solid var(--accent-amber);
+    border-right: 3px solid var(--accent-amber);
+}
+
+.warning-text {
+    font-size: 0.7rem;
+    color: #666;
+    text-align: center;
     letter-spacing: 1px;
 }
 
-.brand-bio {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    max-width: 400px;
+.warning-text i {
+    color: var(--accent-amber);
+    margin-right: 5px;
 }
 
-/* 4. Links Styling */
-.footer-links-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Sub-grid for links */
-    gap: 20px;
-}
-
-.col-header {
-    font-family: var(--font-header, 'Courier New', monospace);
-    color: var(--accent-steel, #2A5D86);
-    margin-bottom: 20px;
-    font-size: 1rem;
-    text-transform: uppercase;
-}
-
-.link-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.link-list li {
-    margin-bottom: 12px;
-}
-
-.link-list a {
-    color: #BBB;
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: all 0.2s ease;
-}
-
-.link-list a:hover {
-    color: var(--accent-amber, #FF8C00);
-    padding-left: 5px; /* Tactical slide effect */
-}
-
-.badge-earn {
-    font-size: 0.7rem;
-    color: var(--accent-amber, #FF8C00);
-    font-weight: bold;
-    margin-left: 6px;
-    vertical-align: middle;
-}
-
-/* 5. Legal Button */
-.btn-legal {
-    display: inline-block;
-    padding: 10px 15px;
-    border: 1px solid #333;
-    color: #DDD;
-    text-decoration: none;
-    font-family: var(--font-header, 'Courier New', monospace);
-    font-size: 0.8rem;
-    background: rgba(255, 255, 255, 0.03);
-    transition: 0.3s;
-}
-
-.btn-legal:hover {
-    border-color: var(--accent-amber, #FF8C00);
-    color: var(--accent-amber, #FF8C00);
-    background: rgba(255, 140, 0, 0.1);
-}
-
-/* 6. Disclaimer Section */
-.footer-disclaimer {
-    border-top: 1px solid #1a1a1a;
-    border-bottom: 1px solid #1a1a1a;
-    padding: 25px 0;
-    margin-bottom: 30px;
-}
-
-.footer-disclaimer p {
-    font-size: 0.75rem;
-    line-height: 1.5;
-    color: #555;
-}
-
-.footer-disclaimer strong {
-    color: #777;
-}
-
-/* 7. Bottom Bar & Socials */
-.footer-bar {
+/* 7. Sub Level (Socials) */
+.sub-level {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    border-top: 1px solid #111;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -355,58 +387,54 @@ a { text-decoration: none; transition: all 0.3s ease; }
     gap: 20px;
 }
 
-.social-grid {
+.social-hud {
     display: flex;
-    gap: 20px;
+    gap: 15px;
 }
 
-.social-link {
-    font-family: var(--font-header, 'Courier New', monospace);
-    font-size: 0.8rem;
-    color: #777;
+.hud-link {
+    color: #555;
     text-decoration: none;
+    font-size: 0.8rem;
     transition: 0.3s;
+    border: 1px solid transparent;
+    padding: 5px;
 }
 
-.social-link:hover {
-    color: #FFF;
+.hud-link:hover {
+    color: var(--accent-amber);
+    border: 1px solid rgba(255, 140, 0, 0.2);
+    box-shadow: inset 0 0 10px rgba(255, 140, 0, 0.1);
 }
 
-.social-link.locked {
+.hud-link.locked {
     color: #333;
     cursor: not-allowed;
-    pointer-events: none;
+    text-decoration: line-through;
 }
 
-.copyright-text {
-    font-size: 0.8rem;
-    color: #444;
+.system-id {
+    font-size: 0.7rem;
+    color: #333;
+    letter-spacing: 2px;
 }
 
-/* =========================================
-   MOBILE RESPONSIVENESS (The Fix)
-   ========================================= */
+/* MOBILE FIX */
 @media (max-width: 768px) {
-    .footer-top-grid {
-        grid-template-columns: 1fr; /* Stack vertically on mobile */
+    .footer-container {
+        flex-direction: column;
         gap: 40px;
     }
-
-    .footer-links-group {
-        grid-template-columns: 1fr; /* Stack links vertically on small mobile */
+    
+    .footer-right {
+        flex-direction: column;
         gap: 30px;
     }
 
-    .brand-bio {
-        max-width: 100%; /* Use full width */
-    }
-    
-    .footer-bar {
+    .sub-level {
+        justify-content: center;
         flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .social-grid {
-        flex-wrap: wrap;
+        text-align: center;
     }
 }
+
