@@ -1,68 +1,236 @@
-/* AFFINITYFLUX GLOBAL STYLES */
+/* --- 1. CSS VARIABLES (AGENCY TERMINAL THEME) --- */
 :root {
-    --brand-blue: #1F5A9E;
-    --brand-gold: #F5A623;
-    --bg-void: #050505;
-    --bg-panel: #111111;
-    --text-main: #E0E0E0;
-    --text-muted: #888888;
-    --border-dim: #333333;
+    /* PALETTE */
+    --bg-void: #050505;       /* Main Background */
+    --bg-panel: #121212;      /* Card/Form Background */
+    --accent-steel: #2A5D86;  /* Primary Headers/Borders (Cobalt Steel) */
+    --accent-amber: #FF8C00;  /* CTA/Glows/Highlights (Signal Amber) */
+    --text-primary: #E0E0E0;  /* Main Body Text */
+    --text-muted: #888888;    /* Subtitles */
+    
+    /* FONTS */
+    --font-header: 'Courier New', monospace;
+    --font-body: 'Inter', sans-serif;
+    
+    /* EFFECTS */
+    --glow-amber: 0 0 15px rgba(255, 140, 0, 0.4);
+    --border-steel: 1px solid rgba(42, 93, 134, 0.5);
+    --border-amber: 1px solid var(--accent-amber);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* --- 2. GLOBAL RESET --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
     width: 100%;
     overflow-x: hidden;
     background-color: var(--bg-void);
-    color: var(--text-main);
-    font-family: 'Inter', sans-serif;
+    color: var(--text-primary);
+    font-family: var(--font-body);
     line-height: 1.6;
 }
 
-/* TYPOGRAPHY */
-h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 700; color: #fff; }
-.text-gold { color: var(--brand-gold); }
-.text-blue { color: var(--brand-blue); }
-
-/* LAYOUT UTILITIES */
-.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-.section { padding: 80px 0; }
-.bg-panel { background-color: var(--bg-panel); border-top: 1px solid var(--border-dim); border-bottom: 1px solid var(--border-dim); }
-.center-text { text-align: center; }
-
-/* BUTTONS */
-.btn { display: inline-block; padding: 15px 35px; text-decoration: none; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; }
-.btn-primary { background-color: var(--brand-gold); color: #000; }
-.btn-secondary { border: 1px solid var(--brand-blue); color: var(--brand-blue); margin-left: 15px; }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 0 15px rgba(31, 90, 158, 0.4); }
-
-/* HERO */
-.hero-section { padding: 120px 0; background: radial-gradient(circle at top right, #0f1c2e 0%, var(--bg-void) 60%); }
-.headline { font-size: 3.5rem; margin-bottom: 20px; }
-.sub-headline { font-size: 1.2rem; color: var(--text-muted); max-width: 700px; margin-bottom: 40px; }
-
-/* TRINITY GRID */
-.trinity-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-.protocol-card { background-color: var(--bg-void); border: 1px solid var(--border-dim); padding: 30px; transition: all 0.3s; }
-.protocol-card:hover { border-color: var(--brand-blue); transform: translateY(-5px); }
-.card-icon { font-size: 2rem; margin-bottom: 20px; }
-.division-tag { display: inline-block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); border-bottom: 1px solid var(--brand-gold); margin-bottom: 10px; }
-
-/* NAVIGATION OVERLAY (Required by Blueprint) */
-#nav-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(5, 5, 5, 0.98); z-index: 1000;
-    display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
-    padding-top: 50px; overflow-y: auto; opacity: 0; visibility: hidden; transition: 0.5s;
+/* --- 3. TYPOGRAPHY & UTILITIES --- */
+h1, h2, h3 {
+    font-family: var(--font-header);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
 }
-#nav-overlay.visible { opacity: 1; visibility: visible; }
-#nav-trigger { position: fixed; top: 25px; right: 25px; z-index: 1001; background: var(--brand-gold); border: none; padding: 10px; cursor: pointer; }
-.bar { width: 30px; height: 3px; background: #000; margin: 5px 0; }
-.overlay-menu ul { list-style: none; text-align: center; }
-.overlay-menu a { font-size: 2rem; color: #fff; text-decoration: none; font-family: 'Cinzel', serif; display: block; margin: 20px 0; }
 
-/* FOOTER */
-.site-footer { background-color: var(--bg-panel); padding: 60px 0; border-top: 1px solid var(--brand-blue); margin-top: auto; }
-.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
-.footer-logo { font-family: 'Cinzel', serif; font-size: 1.5rem; color: #fff; margin-bottom: 20px; }
+.text-amber { color: var(--accent-amber); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.narrow-read { max-width: 800px; }
+.center-text { text-align: center; }
+.section-header-center { text-align: center; font-size: 2rem; margin-bottom: 40px; color: var(--accent-steel); }
+
+/* --- 4. BUTTONS (TERMINAL STYLE) --- */
+.btn-primary {
+    display: inline-block;
+    padding: 15px 30px;
+    font-family: var(--font-header);
+    font-weight: 700;
+    text-decoration: none;
+    background-color: transparent;
+    border: var(--border-amber);
+    color: var(--accent-amber);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-amber);
+    color: #000;
+    box-shadow: var(--glow-amber);
+}
+
+.text-link {
+    color: var(--accent-steel);
+    text-decoration: none;
+    font-family: var(--font-header);
+    font-weight: bold;
+    border-bottom: 1px solid transparent;
+    transition: 0.3s;
+}
+.text-link:hover { border-bottom: 1px solid var(--accent-steel); }
+
+
+/* --- 5. A. HERO SECTION (RETRO GRID ANIMATION) --- */
+.hero-section {
+    position: relative;
+    height: 90vh; /* Almost full screen */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    background-color: var(--bg-void);
+}
+
+/* The Moving Grid */
+.retro-grid-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    perspective: 400px; /* Creates the 3D depth */
+    z-index: 0;
+}
+
+.retro-grid {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 200%;
+    height: 200%;
+    margin-left: -50%;
+    transform: rotateX(60deg); /* Tilts the grid floor */
+    background-image: 
+        linear-gradient(var(--bg-void) 2px, transparent 2px),
+        linear-gradient(90deg, var(--bg-void) 2px, transparent 2px);
+    background-size: 50px 50px;
+    background-color: rgba(42, 93, 134, 0.15); /* Faint Cobalt Steel */
+    animation: gridMove 20s linear infinite;
+}
+
+/* Fade out the grid at the top so it doesn't look like a wall */
+.retro-grid-container::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, var(--bg-void) 20%, transparent 80%);
+}
+
+@keyframes gridMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 1000px; }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2; /* Sits on top of grid */
+}
+
+.hero-headline {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #000;
+}
+
+.hero-subheadline {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 0 10px #000;
+}
+
+
+/* --- 6. SECTIONS --- */
+.content-section { padding: 80px 0; }
+
+.terminal-title {
+    font-size: 1.5rem;
+    color: var(--accent-steel);
+    border-left: 3px solid var(--accent-amber);
+    padding-left: 15px;
+    margin-bottom: 25px;
+}
+
+/* C. TERMINAL PANEL */
+.terminal-panel {
+    background-color: var(--bg-panel);
+    border: var(--border-steel);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.panel-header {
+    background-color: rgba(42, 93, 134, 0.2);
+    padding: 10px 20px;
+    font-family: var(--font-header);
+    font-size: 0.9rem;
+    border-bottom: var(--border-steel);
+    display: flex;
+    align-items: center;
+}
+
+.status-light {
+    display: inline-block;
+    width: 10px; height: 10px;
+    background-color: #00ff00; /* Green active light */
+    border-radius: 50%;
+    margin-right: 10px;
+    box-shadow: 0 0 5px #00ff00;
+}
+
+.panel-body { padding: 30px; }
+
+
+/* D. TRINITY GRID */
+.trinity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.protocol-card {
+    background-color: var(--bg-panel);
+    border: 1px solid #333;
+    padding: 30px;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.protocol-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-amber);
+    box-shadow: var(--glow-amber);
+}
+
+.card-icon { font-size: 2rem; color: var(--accent-steel); margin-bottom: 20px; }
+.division-sub {
+    display: block;
+    font-family: var(--font-header);
+    font-size: 0.8rem;
+    color: var(--accent-amber);
+    margin-bottom: 15px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+/* E. DIGITAL ASSETS & F. FAQ */
+.cta-section { padding: 100px 0; border-top: 1px solid #222; border-bottom: 1px solid #222; }
+.cta-text { margin-bottom: 30px; font-size: 1.2rem; }
+
+.mini-cta { padding: 40px 0; background-color: var(--bg-panel); }
+.small-text { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px; }
+
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .hero-headline { font-size: 1.8rem; }
+    .hero-section { height: 80vh; }
+    .trinity-grid { grid-template-columns: 1fr; }
+    }
