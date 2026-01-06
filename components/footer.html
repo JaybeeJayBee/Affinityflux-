@@ -1,58 +1,59 @@
 <footer class="agency-footer">
-    <div class="container">
+    <div class="footer-container">
         
-        <div class="footer-grid">
+        <div class="footer-top-grid">
             
-            <div class="footer-block brand-block">
-                <h2 class="footer-logo">AFFINITYFLUX</h2>
-                <p class="tagline">Preserve. Secure. Multiply.</p>
-                <p class="mission-blurb">
+            <div class="footer-brand">
+                <h2 class="brand-logo">AFFINITYFLUX</h2>
+                <p class="brand-tagline">Preserve. Secure. Multiply.</p>
+                <p class="brand-bio">
                     The Intelligence Agency for the Sovereign Investor. Bridging the gap between economic history and the digital frontier.
                 </p>
             </div>
 
-            <div class="footer-block links-block">
+            <div class="footer-links-group">
                 
-                <div class="col-agency">
+                <div class="link-col">
                     <h4 class="col-header">// AGENCY</h4>
-                    <ul class="footer-list">
+                    <ul class="link-list">
                         <li><a href="/about">About The Agency</a></li>
                         <li><a href="/secure-comms">Contact Us</a></li>
                         <li><a href="/recruitment">Recruitment Protocol <span class="badge-earn">[EARN]</span></a></li>
                     </ul>
                 </div>
 
-                <div class="col-legal">
+                <div class="link-col">
                     <h4 class="col-header">// LEGAL</h4>
-                    <a href="/legal" class="btn-legal">[ LEGAL PROTOCOLS ]</a>
+                    <a href="/legal" class="btn-legal">
+                        [ LEGAL PROTOCOLS ]
+                    </a>
                 </div>
             </div>
 
         </div>
 
-        <hr class="footer-divider">
-
-        <div class="compliance-block">
-            <p class="disclaimer-text">
-                DISCLAIMER: Affinityflux is an education and research agency, not a financial advisory firm. Nothing on this site constitutes financial advice. Digital assets are volatile; you are the commander of your own capital. Review our 'Zero-Trust' policy before operating.
+        <div class="footer-disclaimer">
+            <p>
+                <strong>DISCLAIMER:</strong> Affinityflux is an education and research agency, not a financial advisory firm. Nothing on this site constitutes financial advice. Digital assets are volatile; you are the commander of your own capital. Review our 'Zero-Trust' policy before operating.
             </p>
         </div>
 
         <div class="footer-bar">
-            <div class="social-uplinks">
-                <a href="https://youtube.com/" class="social-link" title="YouTube" target="_blank">[ YOUTUBE ]</a>
-                <a href="https://twitter.com/" class="social-link" title="X / Twitter" target="_blank">[ X / TWITTER ]</a>
-                <a href="https://instagram.com/" class="social-link" title="Instagram" target="_blank">[ INSTAGRAM ]</a>
-                <span class="social-link locked" title="Clearance Needed">[ DISCORD <i class="fas fa-lock"></i> ]</span>
+            <div class="social-grid">
+                <a href="https://youtube.com" class="social-link" target="_blank">[ YOUTUBE ]</a>
+                <a href="https://twitter.com" class="social-link" target="_blank">[ X / TWITTER ]</a>
+                <a href="https://instagram.com" class="social-link" target="_blank">[ INSTAGRAM ]</a>
+                <span class="social-link locked">[ DISCORD <i class="fas fa-lock"></i> ]</span>
             </div>
-            <div class="copyright">
-                &copy; <span id="year-display"></span> Affinityflux Intelligence Agency. All Rights Reserved.
+
+            <div class="copyright-text">
+                &copy; <span id="year-display"></span> Affinityflux Intelligence.
             </div>
         </div>
-        
+
     </div>
 </footer>
 
 <script>
-    document.getElementById('year-display').textContent = new Date().getFullYear();
-                </script>
+    document.getElementById('year-display').innerText = new Date().getFullYear();
+</script>
