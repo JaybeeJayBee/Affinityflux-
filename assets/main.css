@@ -445,65 +445,133 @@ a { text-decoration: none; transition: all 0.3s ease; }
 }
 
 /* =========================================
-   TACTICAL NAVIGATION SYSTEM (FINAL)
+   MASTER TACTICAL NAVIGATION SYSTEM
+   (Includes: Futuristic Trigger, Overlay, & Dropdowns)
    ========================================= */
 
-/* 1. The Trigger Button [ /// ] */
+/* --- 1. THE FUTURISTIC TRIGGER (Chamfered Glass) --- */
 #nav-trigger {
+    /* Positioning */
     position: fixed;
-    top: 25px;
-    right: 25px;
-    z-index: 10001; /* Must be higher than overlay */
-    background: #000;
+    top: 30px;
+    right: 30px;
+    z-index: 10001;
+
+    /* Shape & Size */
+    min-width: 90px;
+    padding: 12px 20px;
+    
+    /* The "Sci-Fi Cut" Shape (Chamfered Corners) */
+    clip-path: polygon(
+        15px 0, 100% 0, 
+        100% calc(100% - 15px), calc(100% - 15px) 100%, 
+        0 100%, 0 15px
+    );
+
+    /* Visuals: Dark Glass */
+    background: rgba(5, 5, 5, 0.85);
     border: 1px solid var(--accent-steel, #2A5D86);
     color: var(--accent-steel, #2A5D86);
-    padding: 10px 15px;
+    backdrop-filter: blur(8px);
+    
+    /* Typography */
     font-family: 'Courier New', monospace;
-    font-weight: bold;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 3px;
+    text-shadow: 0 0 5px rgba(42, 93, 134, 0.5);
+    
+    /* Interaction */
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden; /* Keeps the scan bar inside */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 0 1px rgba(42, 93, 134, 0.1);
 }
 
+/* Hover Effect: System Active */
 #nav-trigger:hover {
-    color: var(--accent-amber, #FF8C00);
+    background: rgba(42, 93, 134, 0.1);
     border-color: var(--accent-amber, #FF8C00);
-    box-shadow: 0 0 15px rgba(255, 140, 0, 0.3);
+    color: var(--accent-amber, #FF8C00);
+    text-shadow: 0 0 8px rgba(255, 140, 0, 0.8);
+    box-shadow: 0 0 20px rgba(255, 140, 0, 0.2);
+    transform: translateY(-2px);
 }
 
-/* 2. The Full Screen Overlay */
+/* The Scan Bar Animation */
+.scan-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-steel, #2A5D86);
+    opacity: 0.5;
+    animation: scan-down 3s linear infinite;
+    pointer-events: none;
+}
+
+#nav-trigger:hover .scan-bar {
+    background: var(--accent-amber, #FF8C00);
+    animation-duration: 1.5s;
+    box-shadow: 0 0 10px var(--accent-amber, #FF8C00);
+}
+
+@keyframes scan-down {
+    0% { top: -10%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 110%; opacity: 0; }
+}
+
+/* Mobile Adjustment */
+@media (max-width: 768px) {
+    #nav-trigger {
+        top: 20px;
+        right: 20px;
+        min-width: 70px;
+        padding: 10px 15px;
+        font-size: 0.85rem;
+        clip-path: polygon(
+            10px 0, 100% 0, 
+            100% calc(100% - 10px), calc(100% - 10px) 100%, 
+            0 100%, 0 10px
+        );
+    }
+}
+
+/* --- 2. THE OVERLAY (Menu Background) --- */
 #nav-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh; /* Full Height */
-    background-color: rgba(2, 2, 2, 0.98); /* Deep Void (Opaque) */
-    z-index: 10000; /* Sit on top of everything */
+    height: 100vh;
+    background-color: rgba(2, 2, 2, 0.98); /* Deep Void */
+    z-index: 10000;
     
-    /* CRITICAL: ENABLES VERTICAL SCROLLING */
+    /* Vertical Scrolling Logic */
     overflow-y: auto; 
     
     /* Layout */
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 80px; /* Space for the logo */
-    padding-bottom: 50px; /* Space at bottom for scrolling */
+    padding-top: 80px; 
+    padding-bottom: 50px;
     
     /* Visibility Animation */
     opacity: 0;
-    pointer-events: none; /* Click-through when hidden */
+    pointer-events: none;
     transition: opacity 0.3s ease;
 }
 
-/* This class is added by JS to show the menu */
 #nav-overlay.visible {
     opacity: 1;
-    pointer-events: auto; /* Re-enable clicking */
+    pointer-events: auto;
 }
 
-/* 3. Brand Header inside Menu */
+/* --- 3. MENU TYPOGRAPHY & LAYOUT --- */
 .nav-brand-header {
     margin-bottom: 40px;
     text-align: center;
@@ -517,10 +585,9 @@ a { text-decoration: none; transition: all 0.3s ease; }
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
 
-/* 4. Menu List Layout */
 .terminal-menu {
     width: 100%;
-    max-width: 600px; /* Keeps it readable on Desktop */
+    max-width: 600px;
     padding: 0 20px;
 }
 
@@ -530,7 +597,7 @@ a { text-decoration: none; transition: all 0.3s ease; }
     margin: 0;
 }
 
-/* 5. Standard Links (Home, FAQ, etc) */
+/* Main Links */
 .nav-item {
     margin-bottom: 20px;
 }
@@ -546,55 +613,93 @@ a { text-decoration: none; transition: all 0.3s ease; }
 
 .nav-link:hover {
     color: var(--accent-amber, #FF8C00);
-    padding-left: 10px; /* Glitch movement effect */
+    padding-left: 10px; /* Glitch movement */
     text-shadow: 0 0 10px rgba(255, 140, 0, 0.4);
 }
 
-/* 6. Group Headers (Digital Assets, Programs) */
+/* --- 4. DROPDOWN & ACCORDION STYLES --- */
 .nav-group {
     margin-bottom: 30px;
-    border-left: 1px solid #333; /* The vertical line on the left */
+    border-left: 1px solid #333;
     padding-left: 20px;
 }
 
-.group-header {
+.dropdown-btn {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 10px;
+    /* Typography inheritance */
     font-family: 'Courier New', monospace;
-    color: var(--accent-steel, #2A5D86); /* Blue Header */
-    font-size: 0.9rem;
-    display: block;
-    margin-bottom: 15px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    font-size: 1.4rem;
+    color: #CCC;
 }
 
-/* 7. Submenus */
+.dropdown-btn:hover {
+    color: var(--accent-amber, #FF8C00);
+}
+
+/* The Arrow Icon */
+.arrow-icon {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+    color: var(--accent-steel, #2A5D86);
+}
+
+.dropdown-btn.active .arrow-icon {
+    transform: rotate(180deg);
+    color: var(--accent-amber, #FF8C00);
+}
+
+/* Submenu Logic */
 .submenu {
     list-style: none;
-    padding: 0;
+    padding-left: 20px;
+    border-left: 1px solid #333;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    
+    /* Animation */
+    max-height: 500px;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, opacity 0.4s ease;
+    opacity: 1;
 }
 
-.submenu li {
-    margin-bottom: 12px;
+.submenu.hidden {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    pointer-events: none;
 }
 
+/* Sub Links */
 .sub-link {
-    font-family: 'Inter', sans-serif; /* Clean font for reading */
+    font-family: 'Inter', sans-serif;
     font-size: 1rem;
-    color: #AAA;
+    color: #888;
     text-decoration: none;
-    transition: 0.2s;
     display: block;
+    padding: 8px 0;
+    transition: 0.2s;
 }
 
 .sub-link:hover {
     color: #FFF;
+    padding-left: 5px;
 }
 
-/* 8. LOCKED ITEMS (The Greyed Out Links) */
+/* --- 5. UTILITIES --- */
 .locked-item {
-    color: #444 !important; /* Force Dark Grey */
+    color: #444 !important;
     cursor: not-allowed;
-    pointer-events: none; /* Makes it unclickable */
+    pointer-events: none;
 }
 
 .locked-item i {
@@ -602,7 +707,6 @@ a { text-decoration: none; transition: all 0.3s ease; }
     margin-left: 5px;
 }
 
-/* 9. EARN Badge */
 .tag-earn {
     background: var(--accent-amber, #FF8C00);
     color: #000;
@@ -615,7 +719,6 @@ a { text-decoration: none; transition: all 0.3s ease; }
     vertical-align: middle;
 }
 
-/* Blink Animation for the Underscore _ */
 .blink {
     animation: blinker 1s linear infinite;
     color: var(--accent-amber, #FF8C00);
