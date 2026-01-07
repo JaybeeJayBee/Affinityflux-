@@ -1,229 +1,1692 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Field Reports | Affinity Flux</title>
-    <link rel="stylesheet" href="assets/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
+/* --- 1. CSS VARIABLES (AGENCY IDENTITY) --- */
+:root {
+    --bg-void: #050505;
+    --bg-panel: #121212;
+    --accent-steel: #2A5D86;
+    --accent-amber: #FF8C00;
+    --text-primary: #E0E0E0;
+    
+    /* Typography */
+    --font-header: 'Courier New', monospace;
+    --font-body: 'Inter', sans-serif;
+    
+    /* Effects */
+    --glow-amber: 0 0 20px rgba(255, 140, 0, 0.5);
+    --grid-color: rgba(42, 93, 134, 0.3); /* Steel Blue Grid Lines */
+}
 
-    <div id="nav-trigger">
-        <div class="scan-bar"></div>
-        MENU
-    </div>
+/* --- 2. GLOBAL RESET --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-    <div id="nav-overlay">
-        <div class="nav-brand-header">
-            <h1>AFFINITY FLUX</h1>
-        </div>
-        <div class="terminal-menu">
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link">HOME</a>
-                </li>
-                
-                <li class="nav-item nav-group">
-                    <button class="dropdown-btn active">
-                        PROTOCOL <i class="fas fa-chevron-down arrow-icon"></i>
-                    </button>
-                    <ul class="submenu">
-                        <li><a href="recruitment.html" class="sub-link">Recruitment</a></li>
-                        <li><a href="field-reports.html" class="sub-link active-page">Field Reports</a></li>
-                    </ul>
-                </li>
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+    background-color: var(--bg-void);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.6;
+}
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link locked-item">
-                        SECURE COMMS <i class="fas fa-lock"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+h1, h2, h3 {
+    font-family: var(--font-header);
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
 
-    <div class="grid-plate-wrap">
-        <div class="grid-lines"></div>
-        <div class="vignette-overlay"></div>
-    </div>
+a { text-decoration: none; transition: all 0.3s ease; }
 
-    <div class="container relative-z">
+/* UTILITIES */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.center-text { text-align: center; }
+.text-amber { color: var(--accent-amber); }
+.section-title { font-size: 2rem; margin-bottom: 20px; border-bottom: 1px solid var(--accent-steel); display: inline-block; padding-bottom: 10px; }
+.content-section { padding: 80px 0; }
 
-        <header class="report-header">
-            <div class="system-tag">[ /// ]</div>
-            <h4 class="mono-sub">// FIELD REPORTS: OPERATIVE DEBRIEFS</h4>
-            <h1 class="glitch-title">VERIFIED INTELLIGENCE<br><span class="text-steel">FEEDBACK</span></h1>
-            
-            <div class="mission-brief-box">
-                <h3 class="box-label">MISSION BRIEF:</h3>
-                <p>
-                    In the world of intelligence, results are the only thing that matters. We do not seek "compliments." We seek confirmation that our tools work.
-                </p>
-                <p>
-                    Below is the raw data from Sovereign Investors who have used our Tactical Instruments in the field. These reports confirm the accuracy, security, and value of our intelligence.
-                </p>
-            </div>
-        </header>
+/* --- 3. HERO SECTION & RETRO GRID ANIMATION --- */
+.hero-section {
+    position: relative;
+    height: 90vh; /* Tall hero */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #000000 0%, #0f0f0f 100%);
+    perspective: 1000px; /* Essential for 3D effect */
+}
 
-        <section class="hud-section">
-            <div class="section-title-bar">
-                <span class="sec-num">01</span>
-                <h2>AVAILABILITY STATUS</h2>
-            </div>
-            
-            <div class="content-panel">
-                <h3 class="panel-header">HOW THIS ARCHIVE WORKS:</h3>
-                <p class="panel-text">To keep our data accurate, Field Reports are connected directly to the status of our tools.</p>
-                
-                <div class="status-grid">
-                    <div class="status-card live-status">
-                        <div class="indicator-light green-blink"></div>
-                        <h4>LIVE TOOLS</h4>
-                        <p>If a Tactical Instrument is available for purchase in our store, its Field Reports are Unlocked and viewable via the navigation menu.</p>
-                    </div>
+.retro-grid-wrap {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    z-index: 1;
+    transform: perspective(500px) rotateX(60deg); /* 3D Tilt */
+}
 
-                    <div class="status-card dev-status">
-                        <div class="indicator-light amber-solid"></div>
-                        <h4>TOOLS IN DEVELOPMENT</h4>
-                        <p>If an instrument is currently marked [ Awaiting deployment], its report section remains Locked until the tool is released to the public.</p>
-                    </div>
-                </div>
+.grid-lines {
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+    background-size: 50px 50px; /* Size of grid squares */
+    animation: gridMove 20s linear infinite; /* Infinite movement */
+}
 
-                <div class="advisory-box">
-                    <strong>Advisory:</strong> As soon as a new tool launches from Sector 01, its reviews will automatically open in the menu below.
-                </div>
-            </div>
-        </section>
+/* The Horizon Glow (Fades the grid into the distance) */
+.horizon-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, transparent 0%, var(--bg-void) 80%);
+    z-index: 2;
+}
 
-        <section class="hud-section">
-            <div class="section-title-bar">
-                <span class="sec-num">02</span>
-                <h2>HOW TO FIND REPORTS</h2>
-            </div>
+@keyframes gridMove {
+    0% { background-position-y: 0; }
+    100% { background-position-y: 50px; } /* Matches background-size height */
+}
 
-            <div class="content-panel">
-                <h3 class="panel-header">NAVIGATION INSTRUCTIONS:</h3>
-                <p class="panel-text">We categorize reviews by the specific tool they belong to. This ensures you only read feedback relevant to the product you are interested in.</p>
+.hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 800px;
+}
 
-                <ul class="nav-steps-list">
-                    <li>
-                        <span class="step-icon">►</span>
-                        <div class="step-data">
-                            <strong>Locate FIELD REPORTS</strong>
-                            <span>in the Global Navigation Menu (Top Bar).</span>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="step-icon">►</span>
-                        <div class="step-data">
-                            <strong>Hover (or Click) the Down Arrow (▼)</strong>
-                            <span>to see the list.</span>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="step-icon">►</span>
-                        <div class="step-data">
-                            <strong>Check the Status:</strong>
-                            <div class="sub-status-list">
-                                <span class="white-txt">[ White Text ] Active Reports (Click to read).</span>
-                                <span class="grey-txt">[ Grey/Locked Text ] Tool is Awaiting deployment.</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="step-icon">►</span>
-                        <div class="step-data">
-                            <strong>Select:</strong>
-                            <span>Click on the specific active tool to see its verified user reports.</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </section>
+.headline { font-size: 3rem; margin-bottom: 20px; text-shadow: 0 0 10px rgba(0,0,0,0.8); }
+.sub-headline { font-size: 1.1rem; color: var(--text-primary); max-width: 700px; margin: 0 auto; background: rgba(0,0,0,0.6); padding: 15px; border-left: 2px solid var(--accent-amber); }
 
-        <section class="hud-section">
-            <div class="section-title-bar">
-                <span class="sec-num">03</span>
-                <h2>WHAT IS INSIDE A REPORT?</h2>
-            </div>
+/* --- 4. TERMINAL PANEL (Mission) --- */
+.terminal-panel {
+    background-color: var(--bg-panel);
+    border: 1px solid var(--accent-steel);
+    padding: 40px;
+    font-family: var(--font-header);
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
 
-            <div class="content-panel">
-                <h3 class="panel-header">WE DO NOT POST GENERIC REVIEWS.</h3>
-                <p class="panel-text">Our Field Reports are designed to show you exactly how the tool helps you survive and profit. Expect to see:</p>
-                
-                <div class="breakdown-grid">
-                    <div class="breakdown-item">
-                        <i class="icon-tactical">TARGET</i>
-                        <h4>TACTICAL SUCCESS</h4>
-                        <p>Real stories of how a user used the tool to secure their crypto or find an opportunity before the market moved.</p>
-                    </div>
-                    
-                    <div class="breakdown-item">
-                        <i class="icon-tactical">SYSTEM</i>
-                        <h4>SYSTEM INTEGRITY</h4>
-                        <p>Feedback on how clear, deep, and easy-to-use our Tactical Instruments are.</p>
-                    </div>
-                    
-                    <div class="breakdown-item">
-                        <i class="icon-tactical">MIND</i>
-                        <h4>MINDSET SHIFT</h4>
-                        <p>Testimonials showing how the user went from feeling confused to feeling in control of their financial future.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+/* --- 5. TRINITY PROTOCOL (3 Columns) --- */
+.trinity-section {
+    padding: 80px 0;
+    background-color: #0a0a0a;
+}
 
-        <footer class="tactical-footer">
-            <div class="scan-line"></div>
-            
-            <div class="footer-container">
-                <div class="footer-left">
-                    <div class="terminal-logo">AFFINITY FLUX</div>
-                    <div class="status-indicator">
-                        <span class="dot blink"></span> SYSTEM: ONLINE
-                    </div>
-                    <p class="mission-text">
-                        The bridge between sovereignty and intelligence. We provide the tools for the next generation of financial operatives.
-                    </p>
-                </div>
+.trinity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
 
-                <div class="footer-right">
-                    <div class="cmd-col">
-                        <h4 class="cmd-header">SECTOR 01</h4>
-                        <ul class="cmd-list">
-                            <li><a href="recruitment.html">Recruitment <span class="tag-earn">EARN</span></a></li>
-                            <li><a href="field-reports.html">Field Reports</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="cmd-col">
-                        <h4 class="cmd-header">ACCESS</h4>
-                        <a href="#" class="btn-terminal">INITIATE SECURE COMMS</a>
-                    </div>
-                </div>
-            </div>
+.trinity-card {
+    background-color: var(--bg-void);
+    border: 1px solid #222;
+    padding: 30px;
+    transition: all 0.3s ease;
+    border-top: 3px solid var(--accent-steel);
+}
 
-            <div class="warning-box">
-                <p class="warning-text">
-                    <i class="fas fa-exclamation-triangle"></i> 
-                    DISCLAIMER: We provide educational intelligence. We do not provide financial advice. All operations are at your own risk.
-                </p>
-            </div>
+.trinity-card:hover {
+    border-top-color: var(--accent-amber);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
 
-            <div class="sub-level">
-                <p class="copyright-text">© 2025 AFFINITY FLUX. ALL RIGHTS RESERVED.</p>
-                <div class="social-hud">
-                    <a href="#" class="hud-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="hud-link"><i class="fab fa-telegram"></i></a>
-                    <a href="#" class="hud-link locked"><i class="fas fa-envelope"></i></a>
-                </div>
-            </div>
-        </footer>
+.icon-wrapper { margin-bottom: 20px; color: var(--accent-steel); transition: all 0.3s; }
 
-    </div>
+/* HOVER EFFECT: Glow Amber */
+.trinity-card:hover .icon-glow {
+    color: var(--accent-amber);
+    text-shadow: var(--glow-amber);
+}
 
-    <script src="assets/script.js"></script>
+.card-subtitle {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--accent-amber);
+    margin-bottom: 15px;
+    font-family: var(--font-header);
+    text-transform: uppercase;
+}
 
-</body>
-</html>
+.card-bullets {
+    list-style: none;
+    margin-top: 20px;
+    border-top: 1px solid #333;
+    padding-top: 15px;
+    font-size: 0.9rem;
+}
+
+.card-bullets li { margin-bottom: 8px; color: #888; }
+.card-bullets strong { color: var(--text-primary); }
+
+/* --- 6. BUTTONS & CTAS --- */
+.cta-section { padding: 100px 0; background-color: var(--bg-panel); border-top: 1px solid var(--accent-amber); }
+.cta-text { max-width: 700px; margin: 0 auto; font-size: 1.1rem; }
+
+.btn-primary {
+    display: inline-block;
+    background-color: var(--accent-amber);
+    color: #000;
+    padding: 15px 40px;
+    font-family: var(--font-header);
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 2px solid var(--accent-amber);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--accent-amber);
+    box-shadow: var(--glow-amber);
+}
+
+.mini-cta { padding: 40px 0; background-color: var(--bg-void); border-top: 1px solid #222; }
+.btn-secondary {
+    display: inline-block;
+    margin-top: 15px;
+    color: var(--accent-steel);
+    border: 1px solid var(--accent-steel);
+    padding: 10px 25px;
+    font-family: var(--font-header);
+    font-size: 0.8rem;
+}
+
+.btn-secondary:hover {
+    background-color: var(--accent-steel);
+    color: #fff;
+}
+
+/* --- 7. MOBILE RESPONSIVE --- */
+@media (max-width: 768px) {
+    .headline { font-size: 2rem; }
+    .hero-section { height: 80vh; }
+    .retro-grid-wrap { transform: perspective(300px) rotateX(60deg); }
+                }
+/* =========================================
+   TACTICAL HUD FOOTER (FINALIZED)
+   ========================================= */
+
+/* 1. Base Terminal Styling */
+.tactical-footer {
+    position: relative;
+    background-color: #020202; /* Pure Void */
+    margin-top: 100px;
+    padding-bottom: 20px;
+    font-family: 'Courier New', monospace; /* Force Monospace Everywhere */
+    color: #888;
+    overflow: hidden;
+}
+
+/* 2. The "Scanner" Line (Top Glow) */
+.scan-line {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-steel), var(--accent-amber), var(--accent-steel), transparent);
+    box-shadow: 0 0 15px var(--accent-amber);
+    margin-bottom: 50px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+/* 3. The Brand Terminal */
+.terminal-logo {
+    color: #FFF;
+    font-size: 2rem;
+    margin-bottom: 5px;
+    letter-spacing: -2px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.blink {
+    animation: blinker 1s linear infinite;
+    color: var(--accent-amber);
+}
+
+@keyframes blinker { 50% { opacity: 0; } }
+
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.75rem;
+    color: var(--accent-amber);
+    border: 1px solid rgba(255, 140, 0, 0.3);
+    padding: 2px 8px;
+    margin-bottom: 20px;
+    background: rgba(255, 140, 0, 0.05);
+}
+
+.dot {
+    height: 6px;
+    width: 6px;
+    background-color: var(--accent-amber);
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 0 0 5px var(--accent-amber);
+}
+
+.mission-text {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #777;
+    border-left: 2px solid #222;
+    padding-left: 15px;
+    max-width: 400px;
+}
+
+/* 4. Command Grid (Right Side) */
+.footer-right {
+    display: flex;
+    gap: 60px;
+}
+
+.cmd-header {
+    color: var(--accent-steel);
+    font-size: 1rem;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.cmd-list {
+    list-style: none;
+    padding: 0;
+}
+
+.cmd-list li {
+    margin-bottom: 15px;
+}
+
+.cmd-list a {
+    color: #AAA;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 0.2s;
+    text-transform: uppercase;
+}
+
+.cmd-list a:hover {
+    color: #FFF;
+    text-shadow: 0 0 8px #FFF;
+    padding-left: 5px; /* Glitch movement */
+}
+
+.tag-earn {
+    background: var(--accent-amber);
+    color: #000;
+    font-weight: bold;
+    font-size: 0.7rem;
+    padding: 1px 4px;
+    margin-left: 5px;
+}
+
+/* 5. Terminal Button */
+.btn-terminal {
+    display: inline-block;
+    border: 1px dashed var(--accent-steel);
+    color: var(--accent-steel);
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: 0.3s;
+    background: rgba(42, 93, 134, 0.05);
+}
+
+.btn-terminal:hover {
+    border-style: solid;
+    background: var(--accent-steel);
+    color: #FFF;
+    box-shadow: 0 0 15px var(--accent-steel);
+}
+
+/* 6. Warning Box (Disclaimer) */
+.warning-box {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 15px 20px;
+    background: rgba(20, 20, 20, 0.8);
+    border-left: 3px solid var(--accent-amber);
+    border-right: 3px solid var(--accent-amber);
+}
+
+.warning-text {
+    font-size: 0.7rem;
+    color: #666;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.warning-text i {
+    color: var(--accent-amber);
+    margin-right: 5px;
+}
+
+/* 7. Sub Level (Socials & Copyright) */
+.sub-level {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    border-top: 1px solid #111;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.social-hud {
+    display: flex;
+    gap: 15px;
+}
+
+.hud-link {
+    color: #555;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: 0.3s;
+    border: 1px solid transparent;
+    padding: 5px;
+}
+
+.hud-link:hover {
+    color: var(--accent-amber);
+    border: 1px solid rgba(255, 140, 0, 0.2);
+    box-shadow: inset 0 0 10px rgba(255, 140, 0, 0.1);
+}
+
+/* LOCKED ITEM (No Slash) */
+.hud-link.locked {
+    color: #333;
+    cursor: not-allowed;
+    /* Removed text-decoration: line-through */
+}
+
+.copyright-text {
+    font-size: 0.7rem;
+    color: #444;
+    letter-spacing: 1px;
+}
+
+/* MOBILE FIX */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .footer-right {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .sub-level {
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .mission-text {
+        max-width: 100%;
+    }
+}
+
+/* =========================================
+   MASTER TACTICAL NAVIGATION SYSTEM
+   (Includes: Futuristic Trigger, Overlay, & Dropdowns)
+   ========================================= */
+
+/* --- 1. THE FUTURISTIC TRIGGER (Chamfered Glass) --- */
+#nav-trigger {
+    /* Positioning */
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    z-index: 10001;
+
+    /* Shape & Size */
+    min-width: 90px;
+    padding: 12px 20px;
+    
+    /* The "Sci-Fi Cut" Shape (Chamfered Corners) */
+    clip-path: polygon(
+        15px 0, 100% 0, 
+        100% calc(100% - 15px), calc(100% - 15px) 100%, 
+        0 100%, 0 15px
+    );
+
+    /* Visuals: Dark Glass */
+    background: rgba(5, 5, 5, 0.85);
+    border: 1px solid var(--accent-steel, #2A5D86);
+    color: var(--accent-steel, #2A5D86);
+    backdrop-filter: blur(8px);
+    
+    /* Typography */
+    font-family: 'Courier New', monospace;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 3px;
+    text-shadow: 0 0 5px rgba(42, 93, 134, 0.5);
+    
+    /* Interaction */
+    cursor: pointer;
+    overflow: hidden; /* Keeps the scan bar inside */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 0 1px rgba(42, 93, 134, 0.1);
+}
+
+/* Hover Effect: System Active */
+#nav-trigger:hover {
+    background: rgba(42, 93, 134, 0.1);
+    border-color: var(--accent-amber, #FF8C00);
+    color: var(--accent-amber, #FF8C00);
+    text-shadow: 0 0 8px rgba(255, 140, 0, 0.8);
+    box-shadow: 0 0 20px rgba(255, 140, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+/* The Scan Bar Animation */
+.scan-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-steel, #2A5D86);
+    opacity: 0.5;
+    animation: scan-down 3s linear infinite;
+    pointer-events: none;
+}
+
+#nav-trigger:hover .scan-bar {
+    background: var(--accent-amber, #FF8C00);
+    animation-duration: 1.5s;
+    box-shadow: 0 0 10px var(--accent-amber, #FF8C00);
+}
+
+@keyframes scan-down {
+    0% { top: -10%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 110%; opacity: 0; }
+}
+
+/* Mobile Adjustment */
+@media (max-width: 768px) {
+    #nav-trigger {
+        top: 20px;
+        right: 20px;
+        min-width: 70px;
+        padding: 10px 15px;
+        font-size: 0.85rem;
+        clip-path: polygon(
+            10px 0, 100% 0, 
+            100% calc(100% - 10px), calc(100% - 10px) 100%, 
+            0 100%, 0 10px
+        );
+    }
+}
+
+/* --- 2. THE OVERLAY (Menu Background) --- */
+#nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(2, 2, 2, 0.98); /* Deep Void */
+    z-index: 10000;
+    
+    /* Vertical Scrolling Logic */
+    overflow-y: auto; 
+    
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px; 
+    padding-bottom: 50px;
+    
+    /* Visibility Animation */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#nav-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* --- 3. MENU TYPOGRAPHY & LAYOUT --- */
+.nav-brand-header {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.nav-brand-header h1 {
+    font-family: 'Courier New', monospace;
+    color: #FFF;
+    font-size: 1.8rem;
+    letter-spacing: -1px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.terminal-menu {
+    width: 100%;
+    max-width: 600px;
+    padding: 0 20px;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Main Links */
+.nav-item {
+    margin-bottom: 20px;
+}
+
+.nav-link {
+    font-family: 'Courier New', monospace;
+    font-size: 1.4rem;
+    color: #CCC;
+    text-decoration: none;
+    transition: 0.2s;
+    display: block;
+}
+
+.nav-link:hover {
+    color: var(--accent-amber, #FF8C00);
+    padding-left: 10px; /* Glitch movement */
+    text-shadow: 0 0 10px rgba(255, 140, 0, 0.4);
+}
+
+/* --- 4. DROPDOWN & ACCORDION STYLES --- */
+.nav-group {
+    margin-bottom: 30px;
+    border-left: 1px solid #333;
+    padding-left: 20px;
+}
+
+.dropdown-btn {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 10px;
+    /* Typography inheritance */
+    font-family: 'Courier New', monospace;
+    font-size: 1.4rem;
+    color: #CCC;
+}
+
+.dropdown-btn:hover {
+    color: var(--accent-amber, #FF8C00);
+}
+
+/* The Arrow Icon */
+.arrow-icon {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+    color: var(--accent-steel, #2A5D86);
+}
+
+.dropdown-btn.active .arrow-icon {
+    transform: rotate(180deg);
+    color: var(--accent-amber, #FF8C00);
+}
+
+/* Submenu Logic */
+.submenu {
+    list-style: none;
+    padding-left: 20px;
+    border-left: 1px solid #333;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    
+    /* Animation */
+    max-height: 500px;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, opacity 0.4s ease;
+    opacity: 1;
+}
+
+.submenu.hidden {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    pointer-events: none;
+}
+
+/* Sub Links */
+.sub-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #888;
+    text-decoration: none;
+    display: block;
+    padding: 8px 0;
+    transition: 0.2s;
+}
+
+.sub-link:hover {
+    color: #FFF;
+    padding-left: 5px;
+}
+
+/* --- 5. UTILITIES --- */
+.locked-item {
+    color: #444 !important;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.locked-item i {
+    font-size: 0.8rem;
+    margin-left: 5px;
+}
+
+.tag-earn {
+    background: var(--accent-amber, #FF8C00);
+    color: #000;
+    font-family: sans-serif;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 2px 5px;
+    margin-left: 8px;
+    border-radius: 2px;
+    vertical-align: middle;
+}
+
+.blink {
+    animation: blinker 1s linear infinite;
+    color: var(--accent-amber, #FF8C00);
+}
+@keyframes blinker { 50% { opacity: 0; } }
+
+/* --- UPDATED NAVIGATION STYLES (Add to bottom) --- */
+
+/* Dropdown Button Styling (Matches Standard Links) */
+.dropdown-btn {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between; /* Pushes arrow to the right */
+    align-items: center;
+    padding-right: 10px;
+}
+
+/* The Chevron Arrow */
+.arrow-icon {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+    color: var(--accent-steel, #2A5D86);
+}
+
+/* Rotate Arrow when Open */
+.dropdown-btn.active .arrow-icon {
+    transform: rotate(180deg);
+    color: var(--accent-amber, #FF8C00);
+}
+
+/* Submenu Container */
+.submenu {
+    list-style: none;
+    padding-left: 20px;
+    border-left: 1px solid #333;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    
+    /* Animation Mechanics */
+    max-height: 500px; /* Arbitrary large height for animation */
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, opacity 0.4s ease;
+    opacity: 1;
+}
+
+/* Hidden State (Collapsed) */
+.submenu.hidden {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    pointer-events: none;
+}
+
+/* Ensure Sub-links look correct */
+.sub-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #888;
+    text-decoration: none;
+    display: block;
+    padding: 8px 0;
+    transition: 0.2s;
+}
+
+.sub-link:hover {
+    color: #FFF;
+    padding-left: 5px;
+}
+
+/* =========================================
+   PHASE 6 UPGRADES (Scroll & Active State)
+   ========================================= */
+
+/* 1. SMART SCROLL (Hide Button) */
+#nav-trigger {
+    /* Existing styles remain, this just adds the transform capability */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s;
+}
+
+#nav-trigger.scroll-hidden {
+    /* Moves the button up and off the screen */
+    transform: translateY(-150%); 
+}
+
+/* 2. ACTIVE PAGE GLOW (Persistent) */
+.nav-link.active-page,
+.sub-link.active-page {
+    color: var(--accent-amber, #FF8C00) !important;
+    text-shadow: 0 0 10px rgba(255, 140, 0, 0.6);
+    border-left: 2px solid var(--accent-amber, #FF8C00); /* Optional marker */
+    padding-left: 15px; /* Indent slightly */
+    background: rgba(255, 140, 0, 0.05); /* Very faint background tint */
+}
+
+/* Ensure the arrow on dropdowns stays lit if a child is active */
+.dropdown-btn.child-active {
+    color: var(--accent-amber, #FF8C00);
+}
+.dropdown-btn.child-active .arrow-icon {
+    color: var(--accent-amber, #FF8C00);
+}
+
+/* =========================================
+   SECTOR 01: ADVANCED PROTOCOL STYLES
+   ========================================= */
+
+/* CONTAINER & LAYOUT */
+.sector-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 20px 80px;
+    min-height: 80vh;
+}
+
+/* --- HERO HEADER SECTION (UPDATED FOR GRID) --- */
+.sector-header {
+    margin-bottom: 100px;
+    text-align: center;
+    
+    /* NEW: Grid Container Logic */
+    position: relative; 
+    overflow: hidden; 
+    padding: 120px 20px; 
+    background: linear-gradient(to bottom, #000000 0%, #0f0f0f 100%);
+    border-bottom: 1px solid #222;
+}
+
+/* NEW: Ensures the text sits ON TOP of the grid */
+.sector-header .hero-content {
+    position: relative;
+    z-index: 10;
+}
+
+/* NEW: Stretches the grid to fill the background */
+.absolute-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+    pointer-events: none;
+}
+
+.mono-sub {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: #666;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.huge-title {
+    font-size: 3rem;
+    color: #FFF;
+    margin-bottom: 30px;
+    line-height: 1.1;
+    text-shadow: 0 0 20px rgba(42, 93, 134, 0.3);
+}
+
+.mission-brief {
+    max-width: 700px;
+    margin: 0 auto;
+    border-left: 2px solid var(--accent-amber);
+    padding-left: 20px;
+    text-align: left;
+}
+
+.mission-brief p {
+    color: #AAA;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* CATEGORY HEADERS */
+.intel-category {
+    margin-bottom: 100px;
+}
+
+.category-title {
+    font-family: 'Courier New', monospace;
+    color: var(--accent-steel);
+    font-size: 1.2rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+/* THE INTEL GRID */
+.intel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+/* THE CARD STYLING */
+.intel-card {
+    background: rgba(18, 18, 18, 0.6);
+    border: 1px solid #333;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: 0.3s ease;
+    border-top: 3px solid transparent; /* Hidden until hover */
+}
+
+.intel-card:hover {
+    background: rgba(25, 25, 25, 0.9);
+    border-color: var(--accent-steel);
+    border-top-color: var(--accent-amber); /* Amber top on hover */
+    transform: translateY(-5px);
+}
+
+/* Card Top Row */
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.card-type {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    color: var(--accent-steel);
+    letter-spacing: 1px;
+}
+
+.card-icon {
+    font-size: 1.5rem;
+    color: #444;
+    transition: 0.3s;
+}
+
+.intel-card:hover .card-icon {
+    color: var(--accent-amber);
+    text-shadow: 0 0 10px var(--accent-amber);
+}
+
+/* Typography */
+.card-title {
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+    color: #FFF;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.card-desc {
+    font-size: 0.95rem;
+    color: #888;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    flex-grow: 1; /* Pushes button to bottom */
+}
+
+/* The Status Button (Coming Soon) */
+.btn-status {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 1px dashed #444;
+    color: #666;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    cursor: not-allowed;
+    text-align: left;
+    transition: 0.3s;
+}
+
+.intel-card:hover .btn-status {
+    border-color: var(--accent-steel);
+    color: var(--accent-steel);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .huge-title { font-size: 2rem; }
+    .mission-brief { text-align: center; border: none; padding: 0; }
+}
+
+/* =========================================
+   OPERATIONAL FAQ STYLES
+   ========================================= */
+
+.faq-container {
+    padding-bottom: 80px;
+    min-height: 80vh;
+}
+
+.directives-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Section Headers (File Dividers) */
+.faq-section {
+    margin-bottom: 60px;
+}
+
+.section-header {
+    font-family: 'Courier New', monospace;
+    color: var(--accent-steel);
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+/* FAQ Item Container */
+.faq-item {
+    margin-bottom: 15px;
+    border: 1px solid #222;
+    background: rgba(18, 18, 18, 0.4);
+    transition: 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: var(--accent-steel);
+}
+
+/* The Question Button */
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 20px;
+    text-align: left;
+    cursor: pointer;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    color: #CCC;
+    transition: 0.3s;
+}
+
+.faq-question:hover {
+    color: #FFF;
+    background: rgba(42, 93, 134, 0.1);
+}
+
+/* The Question ID (Q1, Q2...) */
+.q-id {
+    color: var(--accent-steel);
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.faq-question:hover .q-id {
+    color: var(--accent-amber);
+    text-shadow: 0 0 10px var(--accent-amber);
+}
+
+/* The Answer (Hidden by default) */
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    
+    background: #0a0a0a;
+    border-top: 1px solid transparent;
+}
+
+/* Active State (When Open) */
+.faq-question.active {
+    background: var(--accent-steel);
+    color: #FFF;
+}
+
+.faq-question.active .q-id {
+    color: #000; /* Contrast against blue background */
+}
+
+.faq-question.active + .faq-answer {
+    padding: 25px 20px;
+    border-top-color: var(--accent-amber); /* Amber line separator */
+}
+
+/* Answer Typography */
+.faq-answer p {
+    font-size: 0.95rem;
+    color: #AAA;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.faq-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 15px;
+}
+
+.faq-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    color: #BBB;
+    font-size: 0.9rem;
+}
+
+.faq-list li::before {
+    content: ">";
+    position: absolute;
+    left: 0;
+    color: var(--accent-amber);
+}
+
+.toggle-icon {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+    color: #555;
+}
+
+.faq-question.active .toggle-icon {
+    transform: rotate(180deg);
+    color: #FFF;
+}
+
+/* Highlighters */
+.highlight-text {
+    border-left: 3px solid var(--accent-amber);
+    padding-left: 15px;
+    color: #FFF !important;
+    font-style: italic;
+}
+
+.status-box-small {
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    border: 1px dashed #333;
+    padding: 10px;
+    display: inline-block;
+    color: #888;
+}
+
+/* =========================================
+   RECRUITMENT PROTOCOL STYLES (TACTICAL DOT MATRIX - FIXED)
+   ========================================= */
+
+/* --- 1. BACKGROUND WRAPPER --- */
+.hex-grid-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #050505;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* --- 2. THE DOT PATTERN --- */
+.hex-pattern {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    
+    /* TACTICAL DOTS: Amber, 1.5px size */
+    background-image: radial-gradient(rgba(255, 140, 0, 0.4) 1.5px, transparent 1.5px);
+    background-size: 30px 30px; 
+    
+    opacity: 0.6;
+}
+
+/* --- 3. THE SCANNER --- */
+.hex-pulse {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Radar Sweep Animation */
+    background: linear-gradient(180deg, transparent 0%, rgba(255, 140, 0, 0.1) 50%, transparent 100%);
+    background-size: 100% 200%;
+    
+    animation: scanner-sweep 8s linear infinite;
+}
+
+@keyframes scanner-sweep {
+    0% { background-position: 0% 200%; }
+    100% { background-position: 0% -100%; }
+}
+
+/* --- 4. TACTICAL TABLE --- */
+.table-wrapper {
+    overflow-x: auto;
+    margin-bottom: 30px;
+    border: 1px solid #333;
+}
+
+.tactical-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    min-width: 600px;
+}
+
+.tactical-table th {
+    background: rgba(42, 93, 134, 0.1);
+    color: var(--accent-steel);
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid var(--accent-steel);
+}
+
+.tactical-table td {
+    padding: 15px;
+    border-bottom: 1px solid #222;
+    color: #CCC;
+}
+
+.badge-tier {
+    padding: 3px 8px;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.tier-1 { background: var(--accent-amber); color: #000; }
+.tier-2 { border: 1px solid var(--accent-steel); color: var(--accent-steel); }
+
+.system-note {
+    background: rgba(255, 140, 0, 0.05);
+    border-left: 3px solid var(--accent-amber);
+    padding: 15px;
+    font-size: 0.9rem;
+    color: #AAA;
+}
+
+/* --- 5. ROLE CARDS (TIER 1 & 2) --- */
+.role-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.role-card {
+    background: rgba(18, 18, 18, 0.6);
+    border: 1px solid #333;
+    padding: 30px;
+    transition: 0.3s;
+}
+
+.role-card:hover {
+    border-color: var(--accent-steel);
+    transform: translateY(-5px);
+}
+
+.card-tier-1 { border-top: 3px solid var(--accent-amber); }
+.card-tier-2 { border-top: 3px solid var(--accent-steel); }
+
+.role-header {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+}
+
+.role-title {
+    color: #FFF;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 5px;
+}
+
+.role-status {
+    font-size: 0.7rem;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+.status-closed { color: var(--accent-amber); }
+.status-open { color: var(--accent-steel); }
+
+.role-desc { color: #999; margin-bottom: 20px; font-size: 0.95rem; }
+
+.role-specs {
+    list-style: none;
+    margin-bottom: 25px;
+}
+
+.role-specs li {
+    margin-bottom: 10px;
+    color: #DDD;
+}
+.role-specs i { color: var(--accent-steel); margin-right: 10px; }
+
+/* FIX APPLIED HERE: Prevents "Digital Assets" from breaking the line */
+.role-target {
+    background: rgba(0,0,0,0.3);
+    padding: 15px;
+    font-size: 0.9rem;
+}
+
+/* Keeps all bold text orange */
+.role-target strong { 
+    color: var(--accent-amber); 
+}
+
+/* ONLY makes the main header ("HOW TO START") sit on its own line */
+.role-target > strong { 
+    display: block; 
+    margin-bottom: 10px; 
+}
+
+.role-target ul, .role-target ol { padding-left: 20px; color: #888; }
+
+/* --- 6. APPLICATION STEPS --- */
+.application-box {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.step-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px dashed #333;
+}
+
+.step-num {
+    font-size: 3rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.05);
+    font-family: 'Courier New', monospace;
+    line-height: 1;
+}
+
+.step-content h4 {
+    color: var(--accent-steel);
+    margin-bottom: 10px;
+}
+.step-content p { color: #AAA; }
+.step-content ul { padding-left: 20px; color: #999; margin-top: 10px; }
+
+.contact-details { list-style: none; padding: 0 !important; }
+.contact-details li { margin-bottom: 5px; }
+
+/* UTILITIES */
+.text-steel { color: var(--accent-steel); }
+.mt-50 { margin-top: 50px; }
+.mt-20 { margin-top: 20px; }
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .step-row { flex-direction: column; gap: 10px; }
+    .step-num { font-size: 2rem; }
+}
+
+/* =========================================
+   FIELD REPORTS PAGE STYLES (THE COMMAND HUD)
+   ========================================= */
+
+/* --- 1. THE GRID PLATE BACKGROUND (Clean, Vertical Lines) --- */
+.grid-plate-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #050505;
+    z-index: -1;
+}
+
+.grid-lines {
+    width: 100%;
+    height: 100%;
+    /* Creates distinct vertical columns like a data sheet */
+    background-image: linear-gradient(90deg, rgba(42, 93, 134, 0.1) 1px, transparent 1px);
+    background-size: 20% 100%; /* Wide columns */
+}
+
+/* --- 2. LAYOUT UTILITIES --- */
+.relative-z { position: relative; z-index: 10; padding-bottom: 100px; }
+
+/* --- 3. HEADER SECTION --- */
+.report-header {
+    text-align: center;
+    padding: 120px 20px 60px;
+}
+
+.system-tag {
+    font-family: 'Courier New', monospace;
+    color: var(--accent-steel, #2A5D86);
+    border: 1px solid var(--accent-steel, #2A5D86);
+    display: inline-block;
+    padding: 5px 15px;
+    margin-bottom: 20px;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+}
+
+.mono-sub {
+    font-family: 'Courier New', monospace;
+    color: #666;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.glitch-title {
+    font-size: 3rem;
+    color: #FFF;
+    margin-bottom: 50px;
+    line-height: 1.1;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(42, 93, 134, 0.3);
+}
+
+.text-steel { color: var(--accent-steel, #2A5D86); }
+
+/* Mission Brief Box */
+.mission-brief-box {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(10, 15, 20, 0.8);
+    border-left: 4px solid var(--accent-steel, #2A5D86);
+    padding: 30px;
+    text-align: left;
+    backdrop-filter: blur(5px);
+}
+
+.box-label {
+    color: var(--accent-steel, #2A5D86);
+    font-family: 'Courier New', monospace;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+.mission-brief-box p {
+    color: #AAA;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* --- 4. HUD SECTIONS --- */
+.hud-section {
+    max-width: 1000px;
+    margin: 80px auto;
+    padding: 0 20px;
+}
+
+.section-title-bar {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+.sec-num {
+    font-family: 'Courier New', monospace;
+    font-size: 1.5rem;
+    color: #333;
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.section-title-bar h2 {
+    font-size: 1.5rem;
+    color: #FFF;
+    letter-spacing: 1px;
+}
+
+/* The Glass Panel */
+.content-panel {
+    background: rgba(18, 18, 18, 0.5);
+    border: 1px solid #222;
+    padding: 40px;
+    transition: border-color 0.3s ease;
+}
+
+.content-panel:hover {
+    border-color: var(--accent-steel, #2A5D86);
+}
+
+.panel-header {
+    color: var(--accent-steel, #2A5D86);
+    font-family: 'Courier New', monospace;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.panel-text {
+    color: #CCC;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+/* --- 5. STATUS GRID (Section 1) --- */
+.status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.status-card {
+    background: #0a0a0a;
+    padding: 25px;
+    border: 1px solid #333;
+    position: relative;
+}
+
+.indicator-light {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    top: 25px;
+    right: 25px;
+}
+
+.green-blink {
+    background-color: #00FF00;
+    box-shadow: 0 0 10px #00FF00;
+    animation: light-blink 2s infinite;
+}
+
+.amber-solid {
+    background-color: #666; /* Grey/Inactive */
+    border: 1px solid #888;
+}
+
+@keyframes light-blink { 50% { opacity: 0.3; } }
+
+.status-card h4 {
+    color: #FFF;
+    margin-bottom: 15px;
+    font-family: 'Courier New', monospace;
+}
+
+.status-card p {
+    color: #888;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.advisory-box {
+    border: 1px dashed var(--accent-amber, #FF8C00);
+    padding: 15px;
+    color: var(--accent-amber, #FF8C00);
+    font-size: 0.9rem;
+    background: rgba(255, 140, 0, 0.05);
+}
+
+/* --- 6. NAV INSTRUCTIONS (Section 2) --- */
+.nav-steps-list {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-steps-list li {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: flex-start;
+}
+
+.step-icon {
+    color: var(--accent-steel, #2A5D86);
+    margin-right: 15px;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.step-data {
+    color: #BBB;
+    font-size: 1rem;
+}
+
+.step-data strong { color: #FFF; display: block; margin-bottom: 5px; }
+
+.sub-status-list {
+    margin-top: 10px;
+    background: #000;
+    padding: 15px;
+    border-left: 2px solid #333;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+}
+
+.sub-status-list span { display: block; margin-bottom: 5px; }
+.white-txt { color: #FFF; }
+.grey-txt { color: #666; }
+
+/* --- 7. BREAKDOWN GRID (Section 3) --- */
+.breakdown-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.breakdown-item {
+    border-top: 2px solid #333;
+    padding-top: 20px;
+    transition: 0.3s;
+}
+
+.breakdown-item:hover {
+    border-top-color: var(--accent-steel, #2A5D86);
+}
+
+.icon-tactical {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    color: #555;
+    border: 1px solid #333;
+    padding: 2px 5px;
+    margin-bottom: 15px;
+    display: inline-block;
+    font-style: normal;
+}
+
+.breakdown-item h4 {
+    color: #FFF;
+    margin-bottom: 10px;
+}
+
+.breakdown-item p {
+    color: #999;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* --- 8. FOOTER NOTE --- */
+.field-footer {
+    text-align: center;
+    max-width: 800px;
+    margin: 50px auto 0;
+    padding-top: 30px;
+    border-top: 1px solid #222;
+}
+
+.footer-status {
+    font-family: 'Courier New', monospace;
+    color: var(--accent-steel, #2A5D86);
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.blink-text { animation: light-blink 3s infinite; }
+
+.field-footer p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* MOBILE ADJUSTMENTS */
+@media (max-width: 768px) {
+    .glitch-title { font-size: 2rem; }
+    .grid-lines { background-size: 50% 100%; }
+    .content-panel { padding: 25px; }
+}
