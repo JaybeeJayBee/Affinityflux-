@@ -1170,7 +1170,7 @@ a { text-decoration: none; transition: all 0.3s ease; }
 }
 
 /* =========================================
-   STYLE OPTION: THE HEX-DEFENSE (HONEYCOMB)
+   STYLE OPTION: THE HEX-DEFENSE (SIGNAL AMBER)
    ========================================= */
 
 .hex-grid-wrap {
@@ -1184,36 +1184,38 @@ a { text-decoration: none; transition: all 0.3s ease; }
     overflow: hidden;
 }
 
-/* UPDATED: High-Visibility Pattern */
+/* THE PATTERN (Updated to Signal Amber) */
 .hex-pattern {
     position: absolute;
     width: 100%;
     height: 100%;
-    /* Thicker lines (2px) and brighter color (0.25) for mobile visibility */
+    
+    /* We use RGBA(255, 140, 0, 0.25) -> Bright Amber */
     background-image: 
-        radial-gradient(circle, transparent 60%, #050505 75%),
-        linear-gradient(rgba(42, 93, 134, 0.25) 2px, transparent 2px),
-        linear-gradient(60deg, rgba(42, 93, 134, 0.25) 2px, transparent 2px),
-        linear-gradient(120deg, rgba(42, 93, 134, 0.25) 2px, transparent 2px);
+        radial-gradient(circle, transparent 65%, #050505 80%),
+        linear-gradient(rgba(255, 140, 0, 0.25) 2px, transparent 2px),
+        linear-gradient(60deg, rgba(255, 140, 0, 0.25) 2px, transparent 2px),
+        linear-gradient(120deg, rgba(255, 140, 0, 0.25) 2px, transparent 2px);
+    
     background-size: 50px 86px; 
-    opacity: 1; /* Full opacity */
+    opacity: 1; 
 }
 
-/* UPDATED: Stronger Pulse */
+/* THE PULSE (Updated to Signal Amber) */
 .hex-pulse {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Brighter center glow */
-    background: radial-gradient(circle at 50% 50%, rgba(42, 93, 134, 0.3), transparent 60%);
-    animation: hex-breathe 4s ease-in-out infinite;
+    /* Glowing Amber Center */
+    background: radial-gradient(circle at 50% 50%, rgba(255, 140, 0, 0.15), transparent 60%);
+    animation: hex-breathe 5s ease-in-out infinite;
 }
 
 @keyframes hex-breathe {
-    0%, 100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(1.1); }
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
 }
 
 /* =========================================
