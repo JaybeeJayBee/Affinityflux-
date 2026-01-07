@@ -825,3 +825,172 @@ a { text-decoration: none; transition: all 0.3s ease; }
 .dropdown-btn.child-active .arrow-icon {
     color: var(--accent-amber, #FF8C00);
 }
+/* =========================================
+   SECTOR 01: ADVANCED PROTOCOL STYLES
+   ========================================= */
+
+/* CONTAINER & LAYOUT */
+.sector-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 20px 80px;
+    min-height: 80vh;
+}
+
+/* HERO HEADER SECTION */
+.sector-header {
+    margin-bottom: 100px;
+    text-align: center;
+    position: relative;
+}
+
+.mono-sub {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: #666;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.huge-title {
+    font-size: 3rem;
+    color: #FFF;
+    margin-bottom: 30px;
+    line-height: 1.1;
+    text-shadow: 0 0 20px rgba(42, 93, 134, 0.3);
+}
+
+.mission-brief {
+    max-width: 700px;
+    margin: 0 auto;
+    border-left: 2px solid var(--accent-amber);
+    padding-left: 20px;
+    text-align: left;
+}
+
+.mission-brief p {
+    color: #AAA;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.status-box {
+    font-family: 'Courier New', monospace;
+    color: var(--accent-amber);
+    font-size: 0.9rem;
+    background: rgba(255, 140, 0, 0.1);
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px dashed var(--accent-amber);
+}
+
+/* CATEGORY HEADERS */
+.intel-category {
+    margin-bottom: 100px;
+}
+
+.category-title {
+    font-family: 'Courier New', monospace;
+    color: var(--accent-steel);
+    font-size: 1.2rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+/* THE INTEL GRID */
+.intel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+/* THE CARD STYLING */
+.intel-card {
+    background: rgba(18, 18, 18, 0.6);
+    border: 1px solid #333;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: 0.3s ease;
+    border-top: 3px solid transparent; /* Hidden until hover */
+}
+
+.intel-card:hover {
+    background: rgba(25, 25, 25, 0.9);
+    border-color: var(--accent-steel);
+    border-top-color: var(--accent-amber); /* Amber top on hover */
+    transform: translateY(-5px);
+}
+
+/* Card Top Row */
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.card-type {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    color: var(--accent-steel);
+    letter-spacing: 1px;
+}
+
+.card-icon {
+    font-size: 1.5rem;
+    color: #444;
+    transition: 0.3s;
+}
+
+.intel-card:hover .card-icon {
+    color: var(--accent-amber);
+    text-shadow: 0 0 10px var(--accent-amber);
+}
+
+/* Typography */
+.card-title {
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+    color: #FFF;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.card-desc {
+    font-size: 0.95rem;
+    color: #888;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    flex-grow: 1; /* Pushes button to bottom */
+}
+
+/* The Status Button (Coming Soon) */
+.btn-status {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 1px dashed #444;
+    color: #666;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    cursor: not-allowed;
+    text-align: left;
+    transition: 0.3s;
+}
+
+.intel-card:hover .btn-status {
+    border-color: var(--accent-steel);
+    color: var(--accent-steel);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .huge-title { font-size: 2rem; }
+    .mission-brief { text-align: center; border: none; padding: 0; }
+    .status-box { display: block; width: 100%; }
+}
