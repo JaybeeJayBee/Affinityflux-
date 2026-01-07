@@ -825,6 +825,7 @@ a { text-decoration: none; transition: all 0.3s ease; }
 .dropdown-btn.child-active .arrow-icon {
     color: var(--accent-amber, #FF8C00);
 }
+
 /* =========================================
    SECTOR 01: ADVANCED PROTOCOL STYLES
    ========================================= */
@@ -837,11 +838,34 @@ a { text-decoration: none; transition: all 0.3s ease; }
     min-height: 80vh;
 }
 
-/* HERO HEADER SECTION */
+/* --- HERO HEADER SECTION (UPDATED FOR GRID) --- */
 .sector-header {
     margin-bottom: 100px;
     text-align: center;
+    
+    /* NEW: Grid Container Logic */
+    position: relative; 
+    overflow: hidden; 
+    padding: 120px 20px; 
+    background: linear-gradient(to bottom, #000000 0%, #0f0f0f 100%);
+    border-bottom: 1px solid #222;
+}
+
+/* NEW: Ensures the text sits ON TOP of the grid */
+.sector-header .hero-content {
     position: relative;
+    z-index: 10;
+}
+
+/* NEW: Stretches the grid to fill the background */
+.absolute-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+    pointer-events: none;
 }
 
 .mono-sub {
@@ -873,16 +897,6 @@ a { text-decoration: none; transition: all 0.3s ease; }
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 20px;
-}
-
-.status-box {
-    font-family: 'Courier New', monospace;
-    color: var(--accent-amber);
-    font-size: 0.9rem;
-    background: rgba(255, 140, 0, 0.1);
-    display: inline-block;
-    padding: 5px 10px;
-    border: 1px dashed var(--accent-amber);
 }
 
 /* CATEGORY HEADERS */
@@ -992,5 +1006,4 @@ a { text-decoration: none; transition: all 0.3s ease; }
 @media (max-width: 768px) {
     .huge-title { font-size: 2rem; }
     .mission-brief { text-align: center; border: none; padding: 0; }
-    .status-box { display: block; width: 100%; }
 }
