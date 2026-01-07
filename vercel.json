@@ -1,8 +1,10 @@
 {
   "rewrites": [
+    { "source": "/sector-01", "destination": "/sector-01.html" },
+    { "source": "/faq", "destination": "/faq.html" },
     { "source": "/protocol", "destination": "/protocol.html" },
-    { "source": "/assets-store", "destination": "/assets-store.html" },
-    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/recruitment", "destination": "/recruitment.html" },
+    { "source": "/secure-comms", "destination": "/secure-comms.html" },
     { "source": "/:path", "destination": "/:path.html" }
   ]
 }
