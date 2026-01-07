@@ -1170,7 +1170,7 @@ a { text-decoration: none; transition: all 0.3s ease; }
 }
 
 /* =========================================
-   RECRUITMENT PROTOCOL STYLES (TACTICAL DOT MATRIX)
+   RECRUITMENT PROTOCOL STYLES (TACTICAL DOT MATRIX - FIXED)
    ========================================= */
 
 /* --- 1. BACKGROUND WRAPPER --- */
@@ -1185,24 +1185,21 @@ a { text-decoration: none; transition: all 0.3s ease; }
     overflow: hidden;
 }
 
-/* --- 2. THE DOT PATTERN (Replaces the Hive) --- */
+/* --- 2. THE DOT PATTERN --- */
 .hex-pattern {
     display: block;
     position: absolute;
     width: 100%;
     height: 100%;
     
-    /* THE TACTICAL DOTS:
-       We create tiny 1.5px dots spaced 30px apart.
-       This looks like a precision grid or star map.
-    */
+    /* TACTICAL DOTS: Amber, 1.5px size */
     background-image: radial-gradient(rgba(255, 140, 0, 0.4) 1.5px, transparent 1.5px);
-    background-size: 30px 30px; /* Space between dots */
+    background-size: 30px 30px; 
     
     opacity: 0.6;
 }
 
-/* --- 3. THE SCANNER (Replaces the Pulse) --- */
+/* --- 3. THE SCANNER --- */
 .hex-pulse {
     position: absolute;
     top: 0;
@@ -1210,7 +1207,7 @@ a { text-decoration: none; transition: all 0.3s ease; }
     width: 100%;
     height: 100%;
     
-    /* A subtle "Radar Sweep" gradient moving vertically */
+    /* Radar Sweep Animation */
     background: linear-gradient(180deg, transparent 0%, rgba(255, 140, 0, 0.1) 50%, transparent 100%);
     background-size: 100% 200%;
     
@@ -1323,12 +1320,24 @@ a { text-decoration: none; transition: all 0.3s ease; }
 }
 .role-specs i { color: var(--accent-steel); margin-right: 10px; }
 
+/* FIX APPLIED HERE: Prevents "Digital Assets" from breaking the line */
 .role-target {
     background: rgba(0,0,0,0.3);
     padding: 15px;
     font-size: 0.9rem;
 }
-.role-target strong { color: var(--accent-amber); display: block; margin-bottom: 10px; }
+
+/* Keeps all bold text orange */
+.role-target strong { 
+    color: var(--accent-amber); 
+}
+
+/* ONLY makes the main header ("HOW TO START") sit on its own line */
+.role-target > strong { 
+    display: block; 
+    margin-bottom: 10px; 
+}
+
 .role-target ul, .role-target ol { padding-left: 20px; color: #888; }
 
 /* --- 6. APPLICATION STEPS --- */
