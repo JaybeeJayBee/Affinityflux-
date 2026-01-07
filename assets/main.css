@@ -1170,7 +1170,7 @@ a { text-decoration: none; transition: all 0.3s ease; }
 }
 
 /* =========================================
-   STYLE OPTION: THE HEX-DEFENSE (SIGNAL AMBER)
+   STYLE OPTION: THE HEX-DEFENSE (HIGH-VISIBILITY AMBER)
    ========================================= */
 
 .hex-grid-wrap {
@@ -1184,32 +1184,35 @@ a { text-decoration: none; transition: all 0.3s ease; }
     overflow: hidden;
 }
 
-/* THE PATTERN (Updated to Signal Amber) */
+/* THE PATTERN (Updated for Maximum Visibility) */
 .hex-pattern {
     position: absolute;
     width: 100%;
     height: 100%;
     
-    /* We use RGBA(255, 140, 0, 0.25) -> Bright Amber */
+    /* UPDATES: 
+       1. Opacity increased to 0.5 (Very Bright)
+       2. Line width increased to 3px (Thick) 
+    */
     background-image: 
         radial-gradient(circle, transparent 65%, #050505 80%),
-        linear-gradient(rgba(255, 140, 0, 0.25) 2px, transparent 2px),
-        linear-gradient(60deg, rgba(255, 140, 0, 0.25) 2px, transparent 2px),
-        linear-gradient(120deg, rgba(255, 140, 0, 0.25) 2px, transparent 2px);
+        linear-gradient(rgba(255, 140, 0, 0.5) 3px, transparent 3px),
+        linear-gradient(60deg, rgba(255, 140, 0, 0.5) 3px, transparent 3px),
+        linear-gradient(120deg, rgba(255, 140, 0, 0.5) 3px, transparent 3px);
     
     background-size: 50px 86px; 
     opacity: 1; 
 }
 
-/* THE PULSE (Updated to Signal Amber) */
+/* THE PULSE */
 .hex-pulse {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Glowing Amber Center */
-    background: radial-gradient(circle at 50% 50%, rgba(255, 140, 0, 0.15), transparent 60%);
+    /* Slightly stronger glow */
+    background: radial-gradient(circle at 50% 50%, rgba(255, 140, 0, 0.2), transparent 60%);
     animation: hex-breathe 5s ease-in-out infinite;
 }
 
