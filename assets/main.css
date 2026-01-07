@@ -1170,10 +1170,10 @@ a { text-decoration: none; transition: all 0.3s ease; }
 }
 
 /* =========================================
-   RECRUITMENT PROTOCOL STYLES (FINALIZED NEON)
+   RECRUITMENT PROTOCOL STYLES (TACTICAL DOT MATRIX)
    ========================================= */
 
-/* --- 1. HEX-DEFENSE BACKGROUND (SVG + GLOW) --- */
+/* --- 1. BACKGROUND WRAPPER --- */
 .hex-grid-wrap {
     position: absolute;
     top: 0;
@@ -1185,43 +1185,44 @@ a { text-decoration: none; transition: all 0.3s ease; }
     overflow: hidden;
 }
 
-/* THE PATTERN: Ultra-Thin SVG Lines with Neon Filter */
+/* --- 2. THE DOT PATTERN (Replaces the Hive) --- */
 .hex-pattern {
     display: block;
     position: absolute;
     width: 100%;
     height: 100%;
     
-    /* 1. RELIABILITY: SVG Image forces the phone to draw the lines. 
-       2. PRECISION: stroke-width='0.5' makes them razor sharp.
+    /* THE TACTICAL DOTS:
+       We create tiny 1.5px dots spaced 30px apart.
+       This looks like a precision grid or star map.
     */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='98' viewBox='0 0 28 49'%3E%3Cpath d='M13.99 0l13.86 8v16l-13.86 8L0 24V8z' fill='none' stroke='%23FF8C00' stroke-width='0.5'/%3E%3C/svg%3E");
+    background-image: radial-gradient(rgba(255, 140, 0, 0.4) 1.5px, transparent 1.5px);
+    background-size: 30px 30px; /* Space between dots */
     
-    background-size: 56px 98px; 
-    opacity: 1; 
-    
-    /* 3. THE GLOW: This adds the "Light" effect to the lines */
-    filter: drop-shadow(0 0 2px #FF8C00); 
+    opacity: 0.6;
 }
 
-/* THE PULSE: The breathing atmosphere */
+/* --- 3. THE SCANNER (Replaces the Pulse) --- */
 .hex-pulse {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Atmospheric glow behind the grid */
-    background: radial-gradient(circle at 50% 50%, rgba(255, 140, 0, 0.2), transparent 60%);
-    animation: hex-breathe 4s ease-in-out infinite;
+    
+    /* A subtle "Radar Sweep" gradient moving vertically */
+    background: linear-gradient(180deg, transparent 0%, rgba(255, 140, 0, 0.1) 50%, transparent 100%);
+    background-size: 100% 200%;
+    
+    animation: scanner-sweep 8s linear infinite;
 }
 
-@keyframes hex-breathe {
-    0%, 100% { opacity: 0.5; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.05); }
+@keyframes scanner-sweep {
+    0% { background-position: 0% 200%; }
+    100% { background-position: 0% -100%; }
 }
 
-/* --- 2. TACTICAL TABLE --- */
+/* --- 4. TACTICAL TABLE --- */
 .table-wrapper {
     overflow-x: auto;
     margin-bottom: 30px;
@@ -1267,7 +1268,7 @@ a { text-decoration: none; transition: all 0.3s ease; }
     color: #AAA;
 }
 
-/* --- 3. ROLE CARDS (TIER 1 & 2) --- */
+/* --- 5. ROLE CARDS (TIER 1 & 2) --- */
 .role-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1330,7 +1331,7 @@ a { text-decoration: none; transition: all 0.3s ease; }
 .role-target strong { color: var(--accent-amber); display: block; margin-bottom: 10px; }
 .role-target ul, .role-target ol { padding-left: 20px; color: #888; }
 
-/* --- 4. APPLICATION STEPS --- */
+/* --- 6. APPLICATION STEPS --- */
 .application-box {
     max-width: 800px;
     margin: 0 auto;
