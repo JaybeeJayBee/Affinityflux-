@@ -1170,10 +1170,10 @@ a { text-decoration: none; transition: all 0.3s ease; }
 }
 
 /* =========================================
-   RECRUITMENT PROTOCOL STYLES (FINALIZED)
+   RECRUITMENT PROTOCOL STYLES (FINALIZED NEON)
    ========================================= */
 
-/* --- 1. HEX-DEFENSE BACKGROUND (HOLOGRAPHIC GRADIENT) --- */
+/* --- 1. HEX-DEFENSE BACKGROUND (SVG + GLOW) --- */
 .hex-grid-wrap {
     position: absolute;
     top: 0;
@@ -1185,42 +1185,40 @@ a { text-decoration: none; transition: all 0.3s ease; }
     overflow: hidden;
 }
 
-/* THE PATTERN: Uses math to draw thin, laser-like lines */
+/* THE PATTERN: Ultra-Thin SVG Lines with Neon Filter */
 .hex-pattern {
     display: block;
     position: absolute;
     width: 100%;
     height: 100%;
     
-    /* 1. We use RGBA(255, 140, 0, 0.4) -> Signal Amber at 40% Visibility.
-       2. We use 1px lines for that sharp "Tactical" look.
+    /* 1. RELIABILITY: SVG Image forces the phone to draw the lines. 
+       2. PRECISION: stroke-width='0.5' makes them razor sharp.
     */
-    background-image: 
-        radial-gradient(circle, transparent 65%, #050505 80%), /* Focus Vignette */
-        linear-gradient(rgba(255, 140, 0, 0.4) 1px, transparent 1px),
-        linear-gradient(60deg, rgba(255, 140, 0, 0.4) 1px, transparent 1px),
-        linear-gradient(120deg, rgba(255, 140, 0, 0.4) 1px, transparent 1px);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='98' viewBox='0 0 28 49'%3E%3Cpath d='M13.99 0l13.86 8v16l-13.86 8L0 24V8z' fill='none' stroke='%23FF8C00' stroke-width='0.5'/%3E%3C/svg%3E");
     
-    /* 40px width x 69px height creates the perfect hexagon ratio */
-    background-size: 40px 69px; 
+    background-size: 56px 98px; 
     opacity: 1; 
+    
+    /* 3. THE GLOW: This adds the "Light" effect to the lines */
+    filter: drop-shadow(0 0 2px #FF8C00); 
 }
 
-/* THE PULSE: The breathing glow behind the hive */
+/* THE PULSE: The breathing atmosphere */
 .hex-pulse {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Stronger center glow */
-    background: radial-gradient(circle at 50% 50%, rgba(255, 140, 0, 0.25), transparent 60%);
+    /* Atmospheric glow behind the grid */
+    background: radial-gradient(circle at 50% 50%, rgba(255, 140, 0, 0.2), transparent 60%);
     animation: hex-breathe 4s ease-in-out infinite;
 }
 
 @keyframes hex-breathe {
-    0%, 100% { opacity: 0.4; transform: scale(1); }
-    50% { opacity: 0.9; transform: scale(1.05); }
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
 }
 
 /* --- 2. TACTICAL TABLE --- */
