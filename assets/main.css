@@ -1170,58 +1170,10 @@ a { text-decoration: none; transition: all 0.3s ease; }
 }
 
 /* =========================================
-   STYLE OPTION: THE DEEP VOID (FAIL-SAFE)
+   RECRUITMENT PROTOCOL STYLES (FINALIZED)
    ========================================= */
 
-.hex-grid-wrap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #050505; /* Deep Black Base */
-    z-index: 1;
-    overflow: hidden;
-}
-
-/* 1. WE REMOVE THE PATTERN (It was causing the issue) */
-.hex-pattern {
-    display: none; 
-}
-
-/* 2. WE BOOST THE ATMOSPHERE (This becomes the main visual) */
-.hex-pulse {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* A rich, breathing amber fog. Simple and clean. */
-    background: radial-gradient(circle at 50% 50%, rgba(255, 140, 0, 0.15), transparent 70%);
-    animation: void-breathe 6s ease-in-out infinite;
-}
-
-/* 3. VIGNETTE (Keeps the corners dark) */
-.vignette-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, transparent 40%, #050505 100%);
-    pointer-events: none;
-}
-
-@keyframes void-breathe {
-    0%, 100% { opacity: 0.4; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(1.1); }
-}
-
-/* =========================================
-   RECRUITMENT PROTOCOL STYLES
-   ========================================= */
-
-/* --- 1. HEX-DEFENSE BACKGROUND --- */
+/* --- 1. HEX-DEFENSE BACKGROUND (SVG VERSION) --- */
 .hex-grid-wrap {
     position: absolute;
     top: 0;
@@ -1233,38 +1185,38 @@ a { text-decoration: none; transition: all 0.3s ease; }
     overflow: hidden;
 }
 
+/* THE PATTERN: Uses an encoded image to guarantee visibility on mobile */
 .hex-pattern {
     position: absolute;
     width: 100%;
     height: 100%;
-    /* Creates the Honeycomb pattern */
-    background-image: 
-        radial-gradient(circle, transparent 65%, #050505 70%),
-        linear-gradient(rgba(42, 93, 134, 0.1) 1px, transparent 1px),
-        linear-gradient(60deg, rgba(42, 93, 134, 0.1) 1px, transparent 1px),
-        linear-gradient(120deg, rgba(42, 93, 134, 0.1) 1px, transparent 1px);
-    background-size: 50px 86px; 
-    opacity: 0.7;
+    
+    /* AMBER HONEYCOMB IMAGE */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='98' viewBox='0 0 28 49'%3E%3Cpath d='M13.99 0l13.86 8v16l-13.86 8L0 24V8z' fill='none' stroke='%23FF8C00' stroke-width='2'/%3E%3C/svg%3E");
+    
+    background-size: 56px 98px; 
+    opacity: 0.4; /* Visibility: 40% (Very Clear) */
 }
 
+/* THE PULSE: The breathing glow behind the hive */
 .hex-pulse {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 50% 50%, rgba(42, 93, 134, 0.15), transparent 60%);
-    animation: hex-breathe 6s ease-in-out infinite;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 140, 0, 0.2), transparent 60%);
+    animation: hex-breathe 5s ease-in-out infinite;
 }
 
 @keyframes hex-breathe {
-    0%, 100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(1.1); }
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
 }
 
 /* --- 2. TACTICAL TABLE --- */
 .table-wrapper {
-    overflow-x: auto; /* Scroll on mobile */
+    overflow-x: auto;
     margin-bottom: 30px;
     border: 1px solid #333;
 }
@@ -1274,7 +1226,7 @@ a { text-decoration: none; transition: all 0.3s ease; }
     border-collapse: collapse;
     font-family: 'Courier New', monospace;
     font-size: 0.9rem;
-    min-width: 600px; /* Forces scroll on small screens */
+    min-width: 600px;
 }
 
 .tactical-table th {
@@ -1413,4 +1365,3 @@ a { text-decoration: none; transition: all 0.3s ease; }
     .step-row { flex-direction: column; gap: 10px; }
     .step-num { font-size: 2rem; }
 }
-
