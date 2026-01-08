@@ -1715,3 +1715,94 @@ a { text-decoration: none; transition: all 0.3s ease; }
     .comms-layout { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
     }
+/* =========================================
+   SUCCESS OVERLAY (TACTICAL POPUP)
+   ========================================= */
+
+#success-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+#success-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.success-card {
+    background: #0a0a0a;
+    border: 2px solid var(--accent-amber);
+    padding: 40px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 0 40px rgba(255, 140, 0, 0.2);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+#success-overlay.visible .success-card {
+    transform: scale(1);
+}
+
+.success-icon {
+    font-size: 3rem;
+    color: var(--accent-amber);
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px var(--accent-amber);
+}
+
+.success-title {
+    font-family: 'Courier New', monospace;
+    font-size: 1.5rem;
+    color: #FFF;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+}
+
+.success-msg {
+    color: #AAA;
+    font-size: 1rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.success-meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: var(--accent-steel);
+    border-top: 1px dashed #333;
+    border-bottom: 1px dashed #333;
+    padding: 10px 0;
+}
+
+.btn-acknowledge {
+    background: var(--accent-amber);
+    color: #000;
+    border: none;
+    padding: 12px 30px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.btn-acknowledge:hover {
+    background: #FFF;
+    box-shadow: 0 0 15px #FFF;
+    }
