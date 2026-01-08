@@ -167,7 +167,7 @@
             </section>
 
             <div class="protocol-footer">
-                <p>Effective Date: <span id="protocol-date">Loading...</span></p>
+                <p>PROTOCOL REVISION: <span id="protocol-date">Loading...</span></p>
                 <p>Contact: legal@Affinityflux.com</p>
             </div>
 
@@ -178,11 +178,15 @@
     <div id="footer-container"></div>
     <script src="/assets/component-loader.js"></script>
 
-    <script>
-        // Automatically sets the date to "January 1, [Current Year]"
+  <script>
+    const dateElement = document.getElementById('protocol-date');
+    if (dateElement) {
         const today = new Date();
-        document.getElementById('protocol-date').textContent = "January 1, " + today.getFullYear();
-    </script>
+        // This formats the date like: "January 8, 2026"
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        dateElement.textContent = today.toLocaleDateString('en-US', options);
+    }
+</script>
     
 </body>
   </html>
