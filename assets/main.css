@@ -1536,3 +1536,182 @@ a { text-decoration: none; transition: all 0.3s ease; }
     font-weight: bold;
     letter-spacing: 1px;
 }
+/* =========================================
+   SECURE COMMS DESIGN (TACTICAL UI)
+   ========================================= */
+
+.comms-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* --- LEFT PANEL: SOCIAL INTEL --- */
+.social-intel-panel {
+    background: rgba(12, 12, 12, 0.5);
+    border: 1px solid #222;
+    padding: 30px;
+}
+
+.panel-header {
+    font-family: 'Courier New', monospace;
+    color: var(--accent-steel);
+    font-size: 1.1rem;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.panel-desc {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+}
+
+/* The Big Email Button */
+.btn-dispatch-email {
+    display: flex;
+    align-items: center;
+    background: rgba(42, 93, 134, 0.1);
+    border: 1px solid var(--accent-steel);
+    padding: 20px;
+    text-decoration: none;
+    margin-bottom: 30px;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-dispatch-email:hover {
+    background: var(--accent-steel);
+    box-shadow: 0 0 20px rgba(42, 93, 134, 0.3);
+}
+
+.btn-dispatch-email i {
+    font-size: 1.8rem;
+    color: #FFF;
+    margin-right: 15px;
+}
+
+.btn-content { display: flex; flex-direction: column; }
+.btn-content .label { font-size: 0.7rem; color: #AAA; letter-spacing: 1px; }
+.btn-content .value { font-size: 1rem; color: #FFF; font-weight: bold; }
+
+.status-dot {
+    width: 8px; height: 8px; background: #00ff00; border-radius: 50%;
+    margin-left: auto; box-shadow: 0 0 5px #00ff00;
+}
+
+/* Social Grid (3 Columns) */
+.social-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+}
+
+.social-tactical-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #0a0a0a;
+    border: 1px solid #333;
+    padding: 20px 10px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.social-tactical-btn i { font-size: 1.5rem; color: #666; margin-bottom: 10px; transition: 0.3s; }
+.social-tactical-btn span { font-size: 0.7rem; color: #666; font-family: 'Courier New', monospace; }
+
+/* Individual Colors on Hover */
+.social-tactical-btn:hover { transform: translateY(-3px); border-color: #FFF; }
+
+.social-tactical-btn:hover span { color: #FFF; }
+
+.social-tactical-btn.yt:hover i { color: #ff0000; text-shadow: 0 0 10px #ff0000; }
+.social-tactical-btn.x:hover i { color: #ffffff; text-shadow: 0 0 10px #ffffff; }
+.social-tactical-btn.ig:hover i { color: #e1306c; text-shadow: 0 0 10px #e1306c; }
+
+
+/* --- RIGHT PANEL: FORM INTEL --- */
+.form-intel-panel {
+    background: rgba(18, 18, 18, 0.8);
+    border: 1px solid #333;
+    border-top: 3px solid var(--accent-amber);
+}
+
+.form-header-strip {
+    background: rgba(255, 140, 0, 0.05);
+    padding: 10px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: var(--accent-amber);
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #222;
+}
+
+.terminal-form { padding: 30px; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.form-group { margin-bottom: 25px; }
+
+.form-group label {
+    display: block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: var(--accent-steel);
+    margin-bottom: 10px;
+}
+
+.terminal-form input, 
+.terminal-form select, 
+.terminal-form textarea {
+    width: 100%;
+    background: #050505;
+    border: 1px solid #333;
+    color: #E0E0E0;
+    padding: 15px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.terminal-form input:focus, 
+.terminal-form textarea:focus,
+.terminal-form select:focus {
+    outline: none;
+    border-color: var(--accent-amber);
+    background: #0f0f0f;
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.1);
+}
+
+/* Transmit Button */
+.btn-transmit {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--accent-amber);
+    color: var(--accent-amber);
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.btn-transmit:hover {
+    background: var(--accent-amber);
+    color: #000;
+    box-shadow: 0 0 25px rgba(255, 140, 0, 0.4);
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+    .comms-layout { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    }
