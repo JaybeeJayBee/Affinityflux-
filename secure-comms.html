@@ -72,12 +72,9 @@
                             <span class="blink">[ RECORDING ]</span>
                         </div>
 
-                        <form action="https://api.web3forms.com/submit" method="POST" class="terminal-form">
+                        <form id="tactical-form" class="terminal-form">
                             
                             <input type="hidden" name="access_key" value="d1c47905-b786-4639-a9bb-86438ba7340a">
-                            
-                            <input type="hidden" name="redirect" value="https://affinityflux.vercel.app/secure-comms">
-                            
                             <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
                             <div class="form-row">
@@ -109,7 +106,8 @@
                             </div>
 
                             <button type="submit" class="btn-transmit">
-                                [ INITIALIZE UPLOAD ]
+                                <span id="btn-text">[ INITIALIZE UPLOAD ]</span>
+                                <span id="btn-loader" style="display:none;">[ UPLOADING... ]</span>
                             </button>
                         </form>
                     </div>
@@ -120,8 +118,76 @@
 
     </main>
 
+    <div id="success-overlay" class="overlay-hidden">
+        <div class="success-card">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="success-title">TRANSMISSION CONFIRMED</h2>
+            <p class="success-msg">
+                Thank you. We have received your message and we'll get back to you soon.
+            </p>
+            <div class="success-meta">
+                <span>STATUS: SECURE</span>
+                <span>TICKET: OPEN</span>
+            </div>
+            <button onclick="closeOverlay()" class="btn-acknowledge">[ ACKNOWLEDGE ]</button>
+        </div>
+    </div>
+
     <div id="footer-container"></div>
     <script src="/assets/component-loader.js"></script>
+
+    <script>
+        const form = document.getElementById('tactical-form');
+        const overlay = document.getElementById('success-overlay');
+        const btnText = document.getElementById('btn-text');
+        const btnLoader = document.getElementById('btn-loader');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop page reload
+            
+            // Show Loading State
+            btnText.style.display = 'none';
+            btnLoader.style.display = 'inline-block';
+
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                    // Success! Show Overlay
+                    overlay.classList.add('visible');
+                    form.reset(); // Clear the form
+                } else {
+                    alert("Transmission Failed. Check connection.");
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                alert("Transmission Error.");
+            })
+            .finally(() => {
+                // Reset Button
+                btnText.style.display = 'inline-block';
+                btnLoader.style.display = 'none';
+            });
+        });
+
+        function closeOverlay() {
+            overlay.classList.remove('visible');
+        }
+    </script>
     
 </body>
-                  </html>
+    </html>
