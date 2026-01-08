@@ -1530,3 +1530,9 @@ a { text-decoration: none; transition: all 0.3s ease; }
     .file-header { padding: 15px 20px; }
     .file-header h2 { font-size: 1rem; }
     }
+/* Add to assets/main.css */
+.protocol-footer .text-amber {
+    color: var(--accent-amber);
+    font-weight: bold;
+    letter-spacing: 1px;
+}
