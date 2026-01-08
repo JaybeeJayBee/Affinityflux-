@@ -1383,3 +1383,150 @@ a { text-decoration: none; transition: all 0.3s ease; }
     .step-num { font-size: 2rem; }
 }
 
+/* =========================================
+   LEGAL PROTOCOLS STYLING
+   ========================================= */
+
+.legal-container {
+    padding-bottom: 80px;
+}
+
+/* The Protocol File Card */
+.protocol-file {
+    background: rgba(12, 12, 12, 0.8);
+    border: 1px solid #222;
+    margin-bottom: 60px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* File Header (The "Tab") */
+.file-header {
+    background: rgba(42, 93, 134, 0.1); /* Steel Tint */
+    border-bottom: 1px solid var(--accent-steel);
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.file-header i {
+    font-size: 1.5rem;
+    color: var(--accent-steel);
+}
+
+.file-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--accent-steel);
+    letter-spacing: 1px;
+}
+
+/* Variant: Amber Header for Terms */
+.header-amber {
+    background: rgba(255, 140, 0, 0.05);
+    border-bottom-color: var(--accent-amber);
+}
+
+.header-amber i,
+.header-amber h2 {
+    color: var(--accent-amber);
+}
+
+/* File Body */
+.file-body {
+    padding: 40px;
+}
+
+.file-subtitle {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: #666;
+    border-left: 2px solid #333;
+    padding-left: 15px;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+/* Directives (Numbered Sections) */
+.directive-block {
+    margin-bottom: 40px;
+}
+
+.directive-block h3 {
+    color: #FFF;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed #333;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.directive-block p {
+    color: #AAA;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+}
+
+.directive-block ul {
+    list-style: none;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.directive-block ul li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    color: #CCC;
+    font-size: 0.95rem;
+}
+
+.directive-block ul li::before {
+    content: ">>";
+    position: absolute;
+    left: 0;
+    color: var(--accent-steel);
+    font-size: 0.8rem;
+}
+
+.directive-block strong {
+    color: #FFF;
+}
+
+/* Special Text Alerts */
+.advisory-text {
+    background: rgba(42, 93, 134, 0.1);
+    border-left: 3px solid var(--accent-steel);
+    padding: 15px;
+    color: #DDD !important;
+    font-style: italic;
+}
+
+.warning-text {
+    background: rgba(255, 140, 0, 0.1);
+    border-left: 3px solid var(--accent-amber);
+    padding: 15px;
+    color: #FFF !important;
+}
+
+/* Bottom Effective Date */
+.protocol-footer {
+    text-align: center;
+    border-top: 1px solid #222;
+    padding-top: 30px;
+    margin-top: 50px;
+}
+
+.protocol-footer p {
+    font-family: 'Courier New', monospace;
+    color: #666;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .file-body { padding: 20px; }
+    .file-header { padding: 15px 20px; }
+    .file-header h2 { font-size: 1rem; }
+    }
