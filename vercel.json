@@ -1,10 +1,33 @@
 {
+  "cleanUrls": true,
   "rewrites": [
-    { "source": "/sector-01", "destination": "/sector-01.html" },
-    { "source": "/faq", "destination": "/faq.html" },
-    { "source": "/protocol", "destination": "/protocol.html" },
-    { "source": "/recruitment", "destination": "/recruitment.html" },
-    { "source": "/secure-comms", "destination": "/secure-comms.html" },
-    { "source": "/:path", "destination": "/:path.html" }
+    { 
+      "source": "/:path((?!.*\\.).*)", 
+      "destination": "/:path.html" 
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "all"
+        }
+      ]
+    },
+    {
+      "source": "/faviconlogo.png",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Content-Type",
+          "value": "image/png"
+        }
+      ]
+    }
   ]
 }
